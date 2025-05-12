@@ -9,11 +9,8 @@
 UCLASS(minimalapi)
 class ATPSGameMode : public AGameModeBase
 {
-	GENERATED_BODY()
+    GENERATED_BODY()
 
-public:
-	ATPSGameMode();
+  public:
+    ATPSGameMode();
 };
-
-
-
