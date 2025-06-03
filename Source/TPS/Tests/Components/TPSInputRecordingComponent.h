@@ -4,8 +4,8 @@
 
 #include "Components/ActorComponent.h"
 #include "CoreMinimal.h"
-#include "TPSInputRecordingComponent.generated.h"
 #include "Tests/Utils/InputRecordingUtils.h"
+#include "TPSInputRecordingComponent.generated.h"
 
 class UEnhancedInputComponent;
 

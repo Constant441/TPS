@@ -4,8 +4,8 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
-#include "TPSBasePickup.generated.h"
 #include "TPSTypes.h"
+#include "TPSBasePickup.generated.h"
 
 class USphereComponent;
 

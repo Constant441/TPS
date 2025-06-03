@@ -4,8 +4,8 @@
 
 #include "Components/ActorComponent.h"
 #include "CoreMinimal.h"
-#include "TPSInventoryComponent.generated.h"
 #include "TPSTypes.h"
+#include "TPSInventoryComponent.generated.h"
 
 
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))

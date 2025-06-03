@@ -5,8 +5,8 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
-#include "TPSCharacter.generated.h"
 #include "TPSTypes.h"
+#include "TPSCharacter.generated.h"
 
 
 class UTPSInventoryComponent;
