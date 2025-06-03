@@ -4,10 +4,26 @@ using UnrealBuildTool;
 
 public class TPS : ModuleRules
 {
-    public TPS(ReadOnlyTargetRules Target) : base(Target)
-    {
-        PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
+	public TPS(ReadOnlyTargetRules Target) : base(Target)
+	{
+		PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;
 
-        PublicDependencyModuleNames.AddRange(new string[] { "Core", "CoreUObject", "Engine", "InputCore", "EnhancedInput" });
-    }
+		PublicDependencyModuleNames.AddRange
+		(
+			new string[]
+			{
+				"Core",
+				"CoreUObject",
+				"Engine",
+				"InputCore",
+				"EnhancedInput",
+				"Json",
+				"JsonUtilities",
+				"UMG",
+				"FunctionalTesting",
+			}
+		);
+
+		PublicIncludePaths.Add("TPS");
+	}
 }

@@ -4,6 +4,7 @@
 
 #include "Camera/CameraComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Components/TPSInventoryComponent.h"
 #include "Engine/LocalPlayer.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
@@ -11,6 +12,7 @@
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
 #include "InputActionValue.h"
+#include "TPS/Components/TPSInventoryComponent.h"
 
 DEFINE_LOG_CATEGORY(LogTemplateCharacter);
 
@@ -41,22 +43,33 @@ ATPSCharacter::ATPSCharacter()
     GetCharacterMovement()->BrakingDecelerationFalling = 1500.0f;
 
     // Create a camera boom (pulls in towards the player if there is a collision)
-    CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("CameraBoom"));
+    CameraBoom = CreateDefaultSubobject<USpringArmComponent>("CameraBoom");
     CameraBoom->SetupAttachment(RootComponent);
     CameraBoom->TargetArmLength = 400.0f;        // The camera follows at this distance behind the character
     CameraBoom->bUsePawnControlRotation = true;  // Rotate the arm based on the controller
 
     // Create a follow camera
-    FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("FollowCamera"));
-    FollowCamera->SetupAttachment(CameraBoom,
-                                  USpringArmComponent::SocketName);  // Attach the camera to the end of the
-                                                                     // boom and let the boom adjust to
-                                                                     // match the controller orientation
-    FollowCamera->bUsePawnControlRotation = false;                   // Camera does not rotate relative to arm
+    FollowCamera = CreateDefaultSubobject<UCameraComponent>("FollowCamera");
+    FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);  // Attach the camera to the end of the
+    // boom and let the boom adjust to
+    // match the controller orientation
+    FollowCamera->bUsePawnControlRotation = false;  // Camera does not rotate relative to arm
+
+    InventoryComponent = CreateDefaultSubobject<UTPSInventoryComponent>("InventoryComp");
 
     // Note: The skeletal mesh and anim blueprint references on the Mesh component
     // (inherited from Character) are set in the derived blueprint asset named
     // ThirdPersonCharacter (to avoid direct content references in C++)
+}
+
+void ATPSCharacter::BeginPlay()
+{
+    Super::BeginPlay();
+
+    check(HealthData.MaxHealth > 0.0f);
+    Health = HealthData.MaxHealth;
+
+    OnTakeAnyDamage.AddDynamic(this, &ATPSCharacter::OnTakeAnyDamageReceived);
 }
 
 //////////////////////////////////////////////////////////////////////////
@@ -84,12 +97,15 @@ void ATPSCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompon
         // Jumping
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Started, this, &ACharacter::Jump);
         EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
+        EnhancedInputComponent->BindActionValue(JumpAction);
 
         // Moving
         EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &ATPSCharacter::Move);
+        EnhancedInputComponent->BindActionValue(MoveAction);
 
         // Looking
         EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &ATPSCharacter::Look);
+        EnhancedInputComponent->BindActionValue(LookAction);
     }
     else
     {
@@ -106,7 +122,7 @@ void ATPSCharacter::Move(const FInputActionValue& Value)
     // input is a Vector2D
     FVector2D MovementVector = Value.Get<FVector2D>();
 
-    if (Controller != nullptr)
+    if (IsValid(Controller))
     {
         // find out which way is forward
         const FRotator Rotation = Controller->GetControlRotation();
@@ -129,7 +145,7 @@ void ATPSCharacter::Look(const FInputActionValue& Value)
     // input is a Vector2D
     FVector2D LookAxisVector = Value.Get<FVector2D>();
 
-    if (Controller != nullptr)
+    if (IsValid(Controller))
     {
         // add yaw and pitch input to controller
         AddControllerYawInput(LookAxisVector.X);
@@ -137,34 +153,57 @@ void ATPSCharacter::Look(const FInputActionValue& Value)
     }
 }
 
-void ATPSCharacter::TestClangFormat(AActor* Actor)
+float ATPSCharacter::GetHealthPercent() const
 {
-    for (int32 i = 0; i < 10; ++i)
+    return Health / HealthData.MaxHealth;
+}
+
+void ATPSCharacter::OnTakeAnyDamageReceived(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser)
+{
+    const auto IsAlive = [&]() {
+        return Health > 0.0f;
+    };
+    if (Damage <= 0.0f || !IsAlive())
+        return;
+
+    Health = FMath::Clamp(Health - Damage, 0.0f, HealthData.MaxHealth);
+    if (IsAlive())
     {
+        GetWorldTimerManager().SetTimer(HealthTimerHandle, this, &ATPSCharacter::OnHealing, HealthData.HealRate, true, -1.0f);
+    }
+    else
+    {
+        OnDeath();
+    }
+}
+
+void ATPSCharacter::OnHealing()
+{
+    Health = FMath::Clamp(Health + HealthData.HealModifier, 0.0f, HealthData.MaxHealth);
+    if (FMath::IsNearlyEqual(Health, HealthData.MaxHealth))
+    {
+        Health = HealthData.MaxHealth;
+        GetWorldTimerManager().ClearTimer(HealthTimerHandle);
+    }
+}
+
+void ATPSCharacter::OnDeath()
+{
+    GetWorldTimerManager().ClearTimer(HealthTimerHandle);
+
+    check(GetCharacterMovement());
+    check(GetCapsuleComponent());
+    check(GetMesh());
+
+    GetCharacterMovement()->DisableMovement();
+    GetCapsuleComponent()->SetCollisionResponseToAllChannels(ECR_Ignore);
+    GetMesh()->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
+    GetMesh()->SetSimulatePhysics(true);
+
+    if (IsValid(Controller))
+    {
+        Controller->ChangeState(NAME_Spectating);
     }
 
-    int32 value = 2;  // trail comment
-
-    if (true)
-    {
-    }
-
-    switch (value)
-    {
-        case 1: value++; break;
-        case 2:
-        {
-        }
-        break;
-        default: break;
-    }
-
-    const TArray<int32> A = {10, 20, 30, 40};
-    const int32 Sum1 = A[0] + A[1] + A[2] + A[3];
-
-    //          clang-format off
-    const int32 Sum2 = A[0] + A[1] + A[2] + A[3];
-
-    AActor* pointer{nullptr};
-    // clang-format on
+    SetLifeSpan(HealthData.LifeSpan);
 }

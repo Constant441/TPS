@@ -6,12 +6,18 @@
 #include "GameFramework/Character.h"
 #include "Logging/LogMacros.h"
 #include "TPSCharacter.generated.h"
+#include "TPSTypes.h"
 
+
+class UTPSInventoryComponent;
 class USpringArmComponent;
 class UCameraComponent;
+class UInputComponent;
 class UInputMappingContext;
 class UInputAction;
 struct FInputActionValue;
+class AController;
+class UDamageType;
 
 DECLARE_LOG_CATEGORY_EXTERN(LogTemplateCharacter, Log, All);
 
@@ -27,6 +33,9 @@ class ATPSCharacter : public ACharacter
     /** Follow camera */
     UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
     UCameraComponent* FollowCamera;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = Camera, meta = (AllowPrivateAccess = "true"))
+    UTPSInventoryComponent* InventoryComponent;
 
     /** MappingContext */
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -44,33 +53,35 @@ class ATPSCharacter : public ACharacter
     UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
     UInputAction* LookAction;
 
-  public:
+public:
     ATPSCharacter();
 
-  protected:
-    /** Called for movement input */
-    void Move(const FInputActionValue& Value);
+    /** Returns CameraBoom subobject **/
+    FORCEINLINE USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
+    /** Returns FollowCamera subobject **/
+    FORCEINLINE UCameraComponent* GetFollowCamera() const { return FollowCamera; }
 
-    /** Called for looking input */
-    void Look(const FInputActionValue& Value);
+    UFUNCTION(BlueprintCallable, Category = "Health" /*, meta = (BlueprintProtected = "true")*/)
+    float GetHealthPercent() const;
 
-  protected:
+protected:
+    virtual void BeginPlay() override;
     virtual void NotifyControllerChanged() override;
 
-    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+    virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
+    void Move(const FInputActionValue& Value);
+    void Look(const FInputActionValue& Value);
 
-  public:
-    /** Returns CameraBoom subobject **/
-    FORCEINLINE class USpringArmComponent* GetCameraBoom() const
-    {
-        return CameraBoom;
-    }
-    /** Returns FollowCamera subobject **/
-    FORCEINLINE class UCameraComponent* GetFollowCamera() const
-    {
-        return FollowCamera;
-    }
+    UPROPERTY(EditDefaultsOnly, BlueprintReadWrite, Category = "Health")
+    FHealthData HealthData;
 
-  private:
-    void TestClangFormat(AActor* Actor);
+private:
+    float Health {0.0f};
+    FTimerHandle HealthTimerHandle;
+
+    UFUNCTION()
+    void OnTakeAnyDamageReceived(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+
+    void OnHealing();
+    void OnDeath();
 };
