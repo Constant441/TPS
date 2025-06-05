@@ -16,22 +16,22 @@
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FInventoryItemCanBeTakenOnJump,
                                  "TPSGame.Gameplay.InventoryItemCanBeTakenOnJump",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FInventoryItemCantBeTakenOnJumpIfToHigh,
                                  "TPSGame.Gameplay.InventoryItemCantBeTakenOnJumpIfToHigh",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FAllItemsCanBeTakenOnMovement,
                                  "TPSGame.Gameplay.AllItemsCanBeTakenOnMovement",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 /*IMPLEMENT_COMPLEX_AUTOMATION_TEST(FAllItemsCanBeTakenOnRecordingMovement, "TPSGame.Gameplay.AllItemsCanBeTakenOnRecordingMovement", EAutomationTestFlags::EditorContext |
  * EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);*/
 
 IMPLEMENT_COMPLEX_AUTOMATION_TEST(FMapsShouldBeLoaded,
                                   "TPSGame.Gameplay.MapsShouldBeLoaded",
-                                  EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                  EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 
 using namespace TPS::Test;

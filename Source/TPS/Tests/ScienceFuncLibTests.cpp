@@ -7,7 +7,7 @@
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFibonacciSimple,
                                  "TPSGame.Science.Fibonacci.Simple",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority)
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority)
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFibonacciStress,
                                  "TPSGame.Science.Fibonacci.Stress",
@@ -17,7 +17,7 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FFibonacciLogHasErrors,
                                  "TPSGame.Science.Fibonacci.LogHasErrors",
                                  EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority)
 
-DEFINE_SPEC(FFactorial, "TPSGame.Science.Factorial", EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority)
+DEFINE_SPEC(FFactorial, "TPSGame.Science.Factorial", EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority)
 
 DEFINE_SPEC(FFactorialStress, "TPSGame.Science.Factorial", EAutomationTestFlags::EditorContext | EAutomationTestFlags::StressFilter | EAutomationTestFlags::LowPriority)
 
