@@ -1,0 +1,1 @@
+java -jar agent.jar -url http://localhost:8080/ -secret a175cfafee6f900615dc1b46b45eeaa0906336730e04c74632e27929789926d8 -name ConstantSqrt441 -webSocket -workDir "C:\Jenkins"

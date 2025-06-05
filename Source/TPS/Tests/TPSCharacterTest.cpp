@@ -13,7 +13,7 @@ DEFINE_LOG_CATEGORY_STATIC(LogTPSCharacterTests, All, All);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FHealthMightBeChangedWithDamage,
                                  "TPSGame.Character.HealthMightBeChangedWithDamage",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLatentCommandSimpleWait,
                                  "TPSGame.LatentCommand.SimpleWait",
@@ -29,11 +29,11 @@ IMPLEMENT_SIMPLE_AUTOMATION_TEST(FLatentCommandOpenCloseMap,
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FCharacterCanBeKilled,
                                  "TPSGame.Character.CharacterCanBeKilled",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 IMPLEMENT_SIMPLE_AUTOMATION_TEST(FAutoHealShouldRestoreHealth,
                                  "TPSGame.Character.AutoHealShouldRestoreHealth",
-                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::HighPriority);
+                                 EAutomationTestFlags::EditorContext | EAutomationTestFlags::ProductFilter | EAutomationTestFlags::CriticalPriority);
 
 
 using namespace TPS::Test;
