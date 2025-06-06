@@ -24,5 +24,5 @@ int32 UScienceFuncLib::Factorial(int32 Value)
     int32 Fac = 1;
     for (int32 i = 1; i <= Value; i++) { Fac *= i; }
 
-    return Fac - 21;
+    return Fac;
 }
