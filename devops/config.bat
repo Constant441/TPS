@@ -18,7 +18,9 @@ rem !! Engine version for packaging !!
 set RunUATPath=%CurrentEnginePath%\Engine\Build\BatchFiles\RunUAT.bat
 
 rem Project params
-set ProjectRoot=%~dp0..
+pushd %~dp0..
+set ProjectRoot=%CD%
+popd
 set ProjectPureName=TPS
 set ProjectName=%ProjectPureName%.uproject
 set ProjectPath=%ProjectRoot%\%ProjectName%
@@ -47,4 +49,5 @@ rem Tests
 set TestOutputLogPath=%ProjectRoot%\Build\Tests\Tests.log
 set ReportOutputPath=%ProjectRoot%\Build\Tests
 set UEAutomationContentPath=%CurrentEnginePath%\Engine\Content\Automation
-set TestNames=TPSGame
+set TestNames=TPSGame.Science
+set OpenCPPCoveragePath=D:\Programs\OpenCppCoverage\OpenCppCoverage.exe

@@ -1,0 +1,237 @@
+﻿{
+	"devices": [
+		{
+			"deviceName": "CONSTANT",
+			"instance": "521F6CEB4C9288BF42633E92D77ABD4F",
+			"instanceName": "CONSTANT-5372",
+			"platform": "WindowsEditor",
+			"oSVersion": "Windows 11 (24H2) [10.0.26100.4061] ",
+			"model": "Default",
+			"gPU": "NVIDIA GeForce RTX 3070",
+			"cPUModel": "12th Gen Intel(R) Core(TM) i9-12900KF",
+			"rAMInGB": 32,
+			"renderMode": "D3D12_SM6",
+			"rHI": "DirectX 12 (SM6)",
+			"appInstanceLog": ""
+		}
+	],
+	"reportCreatedOn": "2025.06.06-18.11.13",
+	"succeeded": 13,
+	"succeededWithWarnings": 0,
+	"failed": 0,
+	"notRun": 0,
+	"inProcess": 0,
+	"totalDuration": 0.19496878981590271,
+	"comparisonExported": false,
+	"comparisonExportDirectory": "",
+	"tests": [
+		{
+			"testDisplayName": "Factorial of 0 should be equal 1",
+			"fullTestPath": "TPSGame.Science.Factorial.Corner cases.Factorial of 0 should be equal 1",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.014999199658632278,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 1 should be equal 1",
+			"fullTestPath": "TPSGame.Science.Factorial.Corner cases.Factorial of 1 should be equal 1",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.015748601406812668,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of negative number is undefined and func should return -1 (INDEX_None)",
+			"fullTestPath": "TPSGame.Science.Factorial.Corner cases.Factorial of negative number is undefined and func should return -1 (INDEX_None)",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.016228999942541122,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 2 should be equal 2",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 2 should be equal 2",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.016570601612329483,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 3 should be equal 3",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 3 should be equal 3",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.016635600477457047,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 4 should be equal 4",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 4 should be equal 4",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.016220100224018097,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 5 should be equal 120",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 5 should be equal 120",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.01671919971704483,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 5 should be equal 5",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 5 should be equal 5",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.017097298055887222,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 6 should be equal 720",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 6 should be equal 720",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.015118900686502457,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 7 should be equal 5040",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 7 should be equal 5040",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.015081502497196198,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Factorial of 8 should be equal 40320",
+			"fullTestPath": "TPSGame.Science.Factorial.Normal cases.Factorial of 8 should be equal 40320",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.017809100449085236,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "LogHasErrors",
+			"fullTestPath": "TPSGame.Science.Fibonacci.LogHasErrors",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.0080880001187324524,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "Fibonacci negative number on input produces error",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2025.06.06-18.11.13"
+				}
+			],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		},
+		{
+			"testDisplayName": "Simple",
+			"fullTestPath": "TPSGame.Science.Fibonacci.Simple",
+			"state": "Success",
+			"deviceInstance": [
+				"521F6CEB4C9288BF42633E92D77ABD4F"
+			],
+			"duration": 0.0086516998708248138,
+			"dateTime": "2025.06.06-18.11.13",
+			"entries": [
+				{
+					"event":
+					{
+						"type": "Info",
+						"message": "Fibonacci simple testing",
+						"context": "",
+						"artifact": "00000000000000000000000000000000"
+					},
+					"filename": "",
+					"lineNumber": -1,
+					"timestamp": "2025.06.06-18.11.13"
+				}
+			],
+			"warnings": 0,
+			"errors": 0,
+			"artifacts": []
+		}
+	]
+}

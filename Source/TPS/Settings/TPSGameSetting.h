@@ -36,5 +36,5 @@ private:
 
     int32 GetCurrentValue() const;
     void SetCurrentValue(int32 Value);
-    int32 GetCurrentIndex();
+    FORCENOINLINE int32 GetCurrentIndex();
 };
