@@ -75,5 +75,5 @@ DerivedDataCache/*
 
 # Automation tests
 devops/tests/data
-devops/jenkins
-Documentation
+devops/jenkins/
+Documentation/
