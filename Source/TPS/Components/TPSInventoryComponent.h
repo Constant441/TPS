@@ -16,6 +16,12 @@ class TPS_API UTPSInventoryComponent : public UActorComponent
 public:
     UTPSInventoryComponent();
 
+    /**
+     * Trying to add inventory to Inventory TMap
+     * Score of the Data object can't be < 0
+     * Final score might be less than the corresponding limit
+     * @param PickupData inventory data to add
+     */
     bool TryToAddItem(const FPickupData& PickupData);
 
     UFUNCTION(BlueprintCallable, Category = "Inventory")

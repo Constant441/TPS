@@ -1,0 +1,77 @@
+\chapter{TPS Project }
+\hypertarget{index}{}\label{index}\index{TPS Project@{TPS Project}}
+\label{index_md__r_e_a_d_m_e}%
+\Hypertarget{index_md__r_e_a_d_m_e}%
+\hypertarget{index_autotoc_md1}{}\doxysection{\texorpdfstring{Overview}{Overview}}\label{index_autotoc_md1}
+This is a Third-\/\+Person Shooter (\doxylink{class_t_p_s}{TPS}) project developed using Unreal Engine. The project includes a customizable character class ({\ttfamily \doxylink{class_a_t_p_s_character}{ATPSCharacter}}), inventory management, and camera controls, with Doxygen-\/generated documentation for code reference.\hypertarget{index_autotoc_md2}{}\doxysection{\texorpdfstring{Prerequisites}{Prerequisites}}\label{index_autotoc_md2}
+
+\begin{DoxyItemize}
+\item {\bfseries{Unreal Engine}}\+: Version 5.\+x or later
+\item {\bfseries{Doxygen}}\+: Version 1.\+9.\+x for generating documentation
+\item {\bfseries{C++ Compiler}}\+: Compatible with Unreal Engine (e.\+g., Visual Studio 2022)
+\item {\bfseries{OS}}\+: Windows 10/11
+\end{DoxyItemize}\hypertarget{index_autotoc_md3}{}\doxysection{\texorpdfstring{Setup}{Setup}}\label{index_autotoc_md3}
+
+\begin{DoxyEnumerate}
+\item {\bfseries{Clone the Repository}}\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{git\ clone\ <repository-\/url>}
+
+\end{DoxyCode}
+
+\item {\bfseries{Open in Unreal Engine}}\+:
+\begin{DoxyItemize}
+\item Open the {\ttfamily .uproject} file in Unreal Engine.
+\item Ensure all dependencies are resolved via the Unreal Editor.
+\end{DoxyItemize}
+\item {\bfseries{Generate Documentation}}\+:
+\begin{DoxyItemize}
+\item Navigate to {\ttfamily D\+:\textbackslash{}Projects\textbackslash{}Unreal Engine\textbackslash{}\doxylink{class_t_p_s}{TPS}\textbackslash{}devops\textbackslash{}docs}.
+\item Run the Doxygen configuration script\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{config\_doxygen.bat}
+
+\end{DoxyCode}
+
+\item Edit {\ttfamily Doxyfile} to include private members (set {\ttfamily EXTRACT\+\_\+\+PRIVATE = YES} and {\ttfamily EXTRACT\+\_\+\+ALL = YES}).
+\item Generate documentation\+: 
+\begin{DoxyCode}{0}
+\DoxyCodeLine{doxygen\ "{}D:\(\backslash\)Projects\(\backslash\)Unreal\ Engine\(\backslash\)TPS\(\backslash\)devops\(\backslash\)docs\(\backslash\)Doxyfile"{}}
+
+\end{DoxyCode}
+
+\end{DoxyItemize}
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md4}{}\doxysection{\texorpdfstring{Project Structure}{Project Structure}}\label{index_autotoc_md4}
+
+\begin{DoxyItemize}
+\item {\bfseries{Source Code}}\+: Located in {\ttfamily Source/\+TPS/}.
+\begin{DoxyItemize}
+\item {\ttfamily \doxylink{_t_p_s_character_8h}{TPSCharacter.\+h}}/{\ttfamily \doxylink{_t_p_s_character_8cpp}{TPSCharacter.\+cpp}}\+: Core character class with movement, camera, and health mechanics.
+\item {\ttfamily TPSInventory\+Component}\+: Manages player inventory.
+\end{DoxyItemize}
+\item {\bfseries{Documentation}}\+: Generated in {\ttfamily devops/docs/html/} after running Doxygen.
+\item {\bfseries{Dev\+Ops Scripts}}\+: Located in {\ttfamily devops/docs/} (e.\+g., {\ttfamily config\+\_\+doxygen.\+bat}).
+\end{DoxyItemize}\hypertarget{index_autotoc_md5}{}\doxysection{\texorpdfstring{Running the Project}{Running the Project}}\label{index_autotoc_md5}
+
+\begin{DoxyEnumerate}
+\item Open the project in Unreal Engine.
+\item Set the default map and game mode in the Unreal Editor.
+\item Press {\bfseries{Play}} to test the game in the editor or build the project for standalone execution.
+\end{DoxyEnumerate}\hypertarget{index_autotoc_md6}{}\doxysection{\texorpdfstring{Documentation}{Documentation}}\label{index_autotoc_md6}
+
+\begin{DoxyItemize}
+\item {\bfseries{View Documentation}}\+: Open {\ttfamily devops/docs/html/index.\+html} in a browser after generating with Doxygen.
+\item {\bfseries{Customization}}\+: Modify {\ttfamily Doxyfile} for light/dark theme or additional settings (e.\+g., {\ttfamily HTML\+\_\+\+COLORSTYLE = LIGHT}).
+\end{DoxyItemize}\hypertarget{index_autotoc_md7}{}\doxysection{\texorpdfstring{Notes}{Notes}}\label{index_autotoc_md7}
+
+\begin{DoxyItemize}
+\item Ensure paths with spaces (e.\+g., {\ttfamily Unreal Engine}) are enclosed in quotes in scripts to avoid issues.
+\item For older Doxygen styles, use a custom {\ttfamily doxygen.\+css} or revert to Doxygen 1.\+8.\+16.
+\end{DoxyItemize}\hypertarget{index_autotoc_md8}{}\doxysection{\texorpdfstring{Contributing}{Contributing}}\label{index_autotoc_md8}
+
+\begin{DoxyItemize}
+\item Fork the repository.
+\item Create a feature branch ({\ttfamily git checkout -\/b feature-\/name}).
+\item Submit a pull request with detailed changes.
+\end{DoxyItemize}\hypertarget{index_autotoc_md9}{}\doxysection{\texorpdfstring{License}{License}}\label{index_autotoc_md9}
+Copyright Epic Games, Inc. All Rights Reserved. See {\ttfamily LICENSE} for details. 

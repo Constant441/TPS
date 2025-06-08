@@ -1,0 +1,42 @@
+\doxysection{TPSPlayer\+Controller.\+h}
+\hypertarget{_t_p_s_player_controller_8h_source}{}\label{_t_p_s_player_controller_8h_source}\index{Source/TPS/TPSPlayerController.h@{Source/TPS/TPSPlayerController.h}}
+\mbox{\hyperlink{_t_p_s_player_controller_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}TPSPlayerController.generated.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \mbox{\hyperlink{_t_p_s_player_controller_8h_a7017d7d687f8890d20666a3f75d5de7a}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE\_OneParam}}(FOnGamePauseDelegate,\ \textcolor{keywordtype}{bool},\ IsPaused);}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }UInputMappingContext;}
+\DoxyCodeLine{00011\ \textcolor{keyword}{class\ }UInputAction;}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ UCLASS()}
+\DoxyCodeLine{00014\ class\ TPS\_API\ \mbox{\hyperlink{class_a_t_p_s_player_controller}{ATPSPlayerController}}\ :\ public\ APlayerController}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \ \ \ \ }
+\DoxyCodeLine{00019\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ Input,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00020\ \ \ \ \ UInputMappingContext*\ MappingContext;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00023\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ Input,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00024\ \ \ \ \ UInputAction*\ PauseAction;}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00027\ \ \ \ \ UPROPERTY(BlueprintAssignable)}
+\DoxyCodeLine{00028\ \ \ \ \ FOnGamePauseDelegate\ \mbox{\hyperlink{class_a_t_p_s_player_controller_aaf72c0e312b8c3801ad3f3b961606b03}{OnGamePause}};}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_t_p_s_player_controller_a0b9bea57683a9139d34c0ddc83f00d5a}{ToggleGamePause}}();}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ protected:}
+\DoxyCodeLine{00033\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_t_p_s_player_controller_a972aa3d71911c17855894a84cea67de4}{SetupInputComponent}}()\ override;}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ private:}
+\DoxyCodeLine{00036\ \ \ \ \ \textcolor{keywordtype}{bool}\ bInPause\ =\ false;}
+\DoxyCodeLine{00037\ \};}
+
+\end{DoxyCode}

@@ -1,0 +1,122 @@
+\doxysection{ATPSCharacter Class Reference}
+\hypertarget{class_a_t_p_s_character}{}\label{class_a_t_p_s_character}\index{ATPSCharacter@{ATPSCharacter}}
+
+
+{\ttfamily \#include $<$TPSCharacter.\+h$>$}
+
+Inheritance diagram for ATPSCharacter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_a_t_p_s_character}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_a_t_p_s_character_ad61baa27409d720e0bcd2a658fd3e0d2}{ATPSCharacter}} ()
+\item 
+FORCEINLINE USpring\+Arm\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015}{Get\+Camera\+Boom}} () const
+\item 
+FORCEINLINE UCamera\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_a_t_p_s_character_a15583006912898a614d7835d1939020c}{Get\+Follow\+Camera}} () const
+\item 
+\texorpdfstring{$\ast$}{*}float \mbox{\hyperlink{class_a_t_p_s_character_a85aa08b00eeb527e1f14979835452f54}{Get\+Health\+Percent}} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+virtual void \mbox{\hyperlink{class_a_t_p_s_character_a5413a922406b729e94593389b31c3996}{Begin\+Play}} () override
+\item 
+virtual void \mbox{\hyperlink{class_a_t_p_s_character_ab62a9ea27cbd608620ee472ff0782135}{Notify\+Controller\+Changed}} () override
+\item 
+virtual void \mbox{\hyperlink{class_a_t_p_s_character_a88ab970bb33e235554750ff739d78fa2}{Setup\+Player\+Input\+Component}} (UInput\+Component \texorpdfstring{$\ast$}{*}Player\+Input\+Component) override
+\item 
+void \mbox{\hyperlink{class_a_t_p_s_character_ae36c09f34253325b321de7c7b3b4d3ad}{Move}} (const FInput\+Action\+Value \&Value)
+\item 
+void \mbox{\hyperlink{class_a_t_p_s_character_af6297f3c7f504955046216e8d9ec6e51}{Look}} (const FInput\+Action\+Value \&Value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{struct_f_health_data}{FHealth\+Data}} \mbox{\hyperlink{class_a_t_p_s_character_a6c33a4404873f225ed5a45f4f32ca9d1}{Health\+Data}}
+\end{DoxyCompactItemize}
+
+
+\label{doc-constructors}
+\Hypertarget{class_a_t_p_s_character_doc-constructors}
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_a_t_p_s_character_ad61baa27409d720e0bcd2a658fd3e0d2}\index{ATPSCharacter@{ATPSCharacter}!ATPSCharacter@{ATPSCharacter}}
+\index{ATPSCharacter@{ATPSCharacter}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{ATPSCharacter()}{ATPSCharacter()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_ad61baa27409d720e0bcd2a658fd3e0d2} 
+ATPSCharacter\+::\+ATPSCharacter (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+\label{doc-func-members}
+\Hypertarget{class_a_t_p_s_character_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_a_t_p_s_character_a5413a922406b729e94593389b31c3996}\index{ATPSCharacter@{ATPSCharacter}!BeginPlay@{BeginPlay}}
+\index{BeginPlay@{BeginPlay}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{BeginPlay()}{BeginPlay()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_a5413a922406b729e94593389b31c3996} 
+void ATPSCharacter\+::\+Begin\+Play (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015}\index{ATPSCharacter@{ATPSCharacter}!GetCameraBoom@{GetCameraBoom}}
+\index{GetCameraBoom@{GetCameraBoom}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{GetCameraBoom()}{GetCameraBoom()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015} 
+FORCEINLINE USpring\+Arm\+Component \texorpdfstring{$\ast$}{*} ATPSCharacter\+::\+Get\+Camera\+Boom (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns Camera\+Boom subobject \Hypertarget{class_a_t_p_s_character_a15583006912898a614d7835d1939020c}\index{ATPSCharacter@{ATPSCharacter}!GetFollowCamera@{GetFollowCamera}}
+\index{GetFollowCamera@{GetFollowCamera}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{GetFollowCamera()}{GetFollowCamera()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_a15583006912898a614d7835d1939020c} 
+FORCEINLINE UCamera\+Component \texorpdfstring{$\ast$}{*} ATPSCharacter\+::\+Get\+Follow\+Camera (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns Follow\+Camera subobject \Hypertarget{class_a_t_p_s_character_a85aa08b00eeb527e1f14979835452f54}\index{ATPSCharacter@{ATPSCharacter}!GetHealthPercent@{GetHealthPercent}}
+\index{GetHealthPercent@{GetHealthPercent}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{GetHealthPercent()}{GetHealthPercent()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_a85aa08b00eeb527e1f14979835452f54} 
+float ATPSCharacter\+::\+Get\+Health\+Percent (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+\Hypertarget{class_a_t_p_s_character_af6297f3c7f504955046216e8d9ec6e51}\index{ATPSCharacter@{ATPSCharacter}!Look@{Look}}
+\index{Look@{Look}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{Look()}{Look()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_af6297f3c7f504955046216e8d9ec6e51} 
+void ATPSCharacter\+::\+Look (\begin{DoxyParamCaption}\item[{const FInput\+Action\+Value \&}]{Value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_a_t_p_s_character_ae36c09f34253325b321de7c7b3b4d3ad}\index{ATPSCharacter@{ATPSCharacter}!Move@{Move}}
+\index{Move@{Move}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{Move()}{Move()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_ae36c09f34253325b321de7c7b3b4d3ad} 
+void ATPSCharacter\+::\+Move (\begin{DoxyParamCaption}\item[{const FInput\+Action\+Value \&}]{Value}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+\Hypertarget{class_a_t_p_s_character_ab62a9ea27cbd608620ee472ff0782135}\index{ATPSCharacter@{ATPSCharacter}!NotifyControllerChanged@{NotifyControllerChanged}}
+\index{NotifyControllerChanged@{NotifyControllerChanged}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{NotifyControllerChanged()}{NotifyControllerChanged()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_ab62a9ea27cbd608620ee472ff0782135} 
+void ATPSCharacter\+::\+Notify\+Controller\+Changed (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+\Hypertarget{class_a_t_p_s_character_a88ab970bb33e235554750ff739d78fa2}\index{ATPSCharacter@{ATPSCharacter}!SetupPlayerInputComponent@{SetupPlayerInputComponent}}
+\index{SetupPlayerInputComponent@{SetupPlayerInputComponent}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{SetupPlayerInputComponent()}{SetupPlayerInputComponent()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_a88ab970bb33e235554750ff739d78fa2} 
+void ATPSCharacter\+::\+Setup\+Player\+Input\+Component (\begin{DoxyParamCaption}\item[{UInput\+Component \texorpdfstring{$\ast$}{*}}]{Player\+Input\+Component}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+\label{doc-variable-members}
+\Hypertarget{class_a_t_p_s_character_doc-variable-members}
+\doxysubsection{Member Data Documentation}
+\Hypertarget{class_a_t_p_s_character_a6c33a4404873f225ed5a45f4f32ca9d1}\index{ATPSCharacter@{ATPSCharacter}!HealthData@{HealthData}}
+\index{HealthData@{HealthData}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{HealthData}{HealthData}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_a6c33a4404873f225ed5a45f4f32ca9d1} 
+\mbox{\hyperlink{struct_f_health_data}{FHealth\+Data}} ATPSCharacter\+::\+Health\+Data\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+TPS/\mbox{\hyperlink{_t_p_s_character_8h}{TPSCharacter.\+h}}\item 
+Source/\+TPS/\mbox{\hyperlink{_t_p_s_character_8cpp}{TPSCharacter.\+cpp}}\end{DoxyCompactItemize}

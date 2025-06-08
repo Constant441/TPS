@@ -1,0 +1,48 @@
+\doxysection{TPSProjectile.\+h}
+\hypertarget{_t_p_s_projectile_8h_source}{}\label{_t_p_s_projectile_8h_source}\index{Source/TPS/Weapon/TPSProjectile.h@{Source/TPS/Weapon/TPSProjectile.h}}
+\mbox{\hyperlink{_t_p_s_projectile_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}TPSProjectile.generated.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }UProjectileMovementComponent;}
+\DoxyCodeLine{00010\ \textcolor{keyword}{class\ }USphereComponent;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ UCLASS(Abstract)}
+\DoxyCodeLine{00013\ class\ TPS\_API\ \mbox{\hyperlink{class_a_t_p_s_projectile_a1e10f386b84c4cd47e7435fa285c26f0}{ATPSProjectile}}\ :\ public\ AActor}
+\DoxyCodeLine{00014\ \{}
+\DoxyCodeLine{00015\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00018\ \ \ \ \ \mbox{\hyperlink{class_a_t_p_s_projectile_a1e10f386b84c4cd47e7435fa285c26f0}{ATPSProjectile}}();}
+\DoxyCodeLine{00019\ }
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_a_t_p_s_projectile_a202b35e3e1545136186aed08cd968281}{SetShotDirection}}(\textcolor{keyword}{const}\ FVector\&\ Direction)\ \{\ ShotDirection\ =\ Direction;\ \};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00023\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Components"{}})}
+\DoxyCodeLine{00024\ \ \ \ \ USphereComponent*\ \mbox{\hyperlink{class_a_t_p_s_projectile_a6281a9462444f156222eb5a8469c29ee}{CollisionComponent}};}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Components"{}})}
+\DoxyCodeLine{00027\ \ \ \ \ UProjectileMovementComponent*\ \mbox{\hyperlink{class_a_t_p_s_projectile_a26dc347f0461e8e1c86e28ea4fb68422}{MovementComponent}};}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Projectile"{}})}
+\DoxyCodeLine{00030\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{class_a_t_p_s_projectile_a248e6ab13d8c9cbd033dcb41a0addaea}{DamageAmount}}\ \{30.0f\};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Projectile"{}},\ meta\ =\ (Units\ =\ s))}
+\DoxyCodeLine{00033\ \ \ \ \ float\ \mbox{\hyperlink{class_a_t_p_s_projectile_a3ed0869aae073c95c4f6a5af9d7f8e4b}{LifeSeconds}}\ \{5.0f\};}
+\DoxyCodeLine{00034\ }
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BeginPlay()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ FVector\ ShotDirection;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00041\ \ \ \ \ void\ OnProjectileHit(UPrimitiveComponent*\ HitComponent,\ AActor*\ OtherActor,\ UPrimitiveComponent*\ OtherComp,\ FVector\ NormalImpulse,\ const\ FHitResult\&\ Hit);}
+\DoxyCodeLine{00042\ \};}
+
+\end{DoxyCode}

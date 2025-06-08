@@ -1,0 +1,86 @@
+\doxysection{TPSCharacter.\+h}
+\hypertarget{_t_p_s_character_8h_source}{}\label{_t_p_s_character_8h_source}\index{Source/TPS/TPSCharacter.h@{Source/TPS/TPSCharacter.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Copyright\ Epic\ Games,\ Inc.\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Character.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}Logging/LogMacros.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}TPSTypes.h"{}}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ "{}TPSCharacter.generated.h"{}}}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{class\ }UTPSInventoryComponent;}
+\DoxyCodeLine{00013\ \textcolor{keyword}{class\ }USpringArmComponent;}
+\DoxyCodeLine{00014\ \textcolor{keyword}{class\ }UCameraComponent;}
+\DoxyCodeLine{00015\ \textcolor{keyword}{class\ }UInputComponent;}
+\DoxyCodeLine{00016\ \textcolor{keyword}{class\ }UInputMappingContext;}
+\DoxyCodeLine{00017\ \textcolor{keyword}{class\ }UInputAction;}
+\DoxyCodeLine{00018\ \textcolor{keyword}{struct\ }FInputActionValue;}
+\DoxyCodeLine{00019\ \textcolor{keyword}{class\ }AController;}
+\DoxyCodeLine{00020\ \textcolor{keyword}{class\ }UDamageType;}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ DECLARE\_LOG\_CATEGORY\_EXTERN(LogTemplateCharacter,\ Log,\ All);}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ UCLASS(config\ =\ Game)}
+\DoxyCodeLine{00025\ class\ ATPSCharacter\ :\ public\ ACharacter}
+\DoxyCodeLine{00026\ \{}
+\DoxyCodeLine{00027\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00028\ }
+\DoxyCodeLine{00029\ \ \ \ \ }
+\DoxyCodeLine{00030\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ Camera,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00031\ \ \ \ \ USpringArmComponent*\ CameraBoom;}
+\DoxyCodeLine{00032\ }
+\DoxyCodeLine{00034\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ Camera,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00035\ \ \ \ \ UCameraComponent*\ FollowCamera;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadOnly,\ Category\ =\ Camera,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00038\ \ \ \ \ UTPSInventoryComponent*\ InventoryComponent;}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00041\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ Input,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00042\ \ \ \ \ UInputMappingContext*\ DefaultMappingContext;}
+\DoxyCodeLine{00043\ }
+\DoxyCodeLine{00045\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ Input,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00046\ \ \ \ \ UInputAction*\ JumpAction;}
+\DoxyCodeLine{00047\ }
+\DoxyCodeLine{00049\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ Input,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00050\ \ \ \ \ UInputAction*\ MoveAction;}
+\DoxyCodeLine{00051\ }
+\DoxyCodeLine{00053\ \ \ \ \ UPROPERTY(EditAnywhere,\ BlueprintReadOnly,\ Category\ =\ Input,\ meta\ =\ (AllowPrivateAccess\ =\ \textcolor{stringliteral}{"{}true"{}}))}
+\DoxyCodeLine{00054\ \ \ \ \ UInputAction*\ LookAction;}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00057\ \ \ \ \ ATPSCharacter();}
+\DoxyCodeLine{00058\ }
+\DoxyCodeLine{00060\ \ \ \ \ FORCEINLINE\ USpringArmComponent*\ \mbox{\hyperlink{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015}{GetCameraBoom}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ CameraBoom;\ \}}
+\DoxyCodeLine{00062\ \ \ \ \ FORCEINLINE\ UCameraComponent*\ \mbox{\hyperlink{class_a_t_p_s_character_a15583006912898a614d7835d1939020c}{GetFollowCamera}}()\textcolor{keyword}{\ const\ }\{\ \textcolor{keywordflow}{return}\ FollowCamera;\ \}}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ UFUNCTION(BlueprintCallable,\ Category\ =\ \textcolor{stringliteral}{"{}Health"{}}\ \textcolor{comment}{/*,\ meta\ =\ (BlueprintProtected\ =\ "{}true"{})*/})}
+\DoxyCodeLine{00065\ \ \ \ \ float\ GetHealthPercent()\ const;}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00067\ protected:}
+\DoxyCodeLine{00068\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ BeginPlay()\ override;}
+\DoxyCodeLine{00069\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ NotifyControllerChanged()\ override;}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ virtual\ \textcolor{keywordtype}{void}\ SetupPlayerInputComponent(UInputComponent*\ PlayerInputComponent)\ override;}
+\DoxyCodeLine{00072\ \ \ \ \ \textcolor{keywordtype}{void}\ Move(const\ FInputActionValue\&\ Value);}
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keywordtype}{void}\ Look(const\ FInputActionValue\&\ Value);}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Health"{}})}
+\DoxyCodeLine{00076\ \ \ \ \ \mbox{\hyperlink{struct_f_health_data}{FHealthData}}\ HealthData;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ private:}
+\DoxyCodeLine{00079\ \ \ \ \ \textcolor{keywordtype}{float}\ Health\ \{0.0f\};}
+\DoxyCodeLine{00080\ \ \ \ \ FTimerHandle\ HealthTimerHandle;}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ \ \ \ \ UFUNCTION()}
+\DoxyCodeLine{00083\ \ \ \ \ void\ OnTakeAnyDamageReceived(AActor*\ DamagedActor,\ \textcolor{keywordtype}{float}\ Damage,\ const\ UDamageType*\ DamageType,\ AController*\ InstigatedBy,\ AActor*\ DamageCauser);}
+\DoxyCodeLine{00084\ }
+\DoxyCodeLine{00085\ \ \ \ \ \textcolor{keywordtype}{void}\ OnHealing();}
+\DoxyCodeLine{00086\ \ \ \ \ \textcolor{keywordtype}{void}\ OnDeath();}
+\DoxyCodeLine{00087\ \};}
+
+\end{DoxyCode}

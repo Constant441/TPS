@@ -1,0 +1,37 @@
+\doxysection{TPSGame\+User\+Settings.\+h}
+\hypertarget{_t_p_s_game_user_settings_8h_source}{}\label{_t_p_s_game_user_settings_8h_source}\index{Source/TPS/Settings/TPSGameUserSettings.h@{Source/TPS/Settings/TPSGameUserSettings.h}}
+\mbox{\hyperlink{_t_p_s_game_user_settings_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/GameUserSettings.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}TPSGameUserSettings.generated.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_u_t_p_s_game_setting}{UTPSGameSetting}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ \mbox{\hyperlink{_t_p_s_game_user_settings_8h_a1b68c7266faae4213c1d6b83dbcdce95}{DECLARE\_DYNAMIC\_MULTICAST\_DELEGATE}}(FOnSettingsUpdateDelegate);}
+\DoxyCodeLine{00012\ }
+\DoxyCodeLine{00013\ UCLASS()}
+\DoxyCodeLine{00014\ class\ TPS\_API\ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_aec28f627b895c2801e067a110f8c6d1e}{UTPSGameUserSettings}}\ :\ public\ UGameUserSettings}
+\DoxyCodeLine{00015\ \{}
+\DoxyCodeLine{00016\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00017\ }
+\DoxyCodeLine{00018\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00019\ \ \ \ \ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_aec28f627b895c2801e067a110f8c6d1e}{UTPSGameUserSettings}}();}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{static}\ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_aec28f627b895c2801e067a110f8c6d1e}{UTPSGameUserSettings}}*\ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_a5b6b6ccd74890eddc03f5f8ed8cb2d3c}{Get}}();}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ \textcolor{keyword}{const}\ TArray<UTPSGameSetting*>\&\ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_abe15782b804e6090b9d664c07c0c2cd0}{GetVideoSettings}}()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_a4cfedc2fb02225cab128649861b59501}{RunBenchmark}}();}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ FOnSettingsUpdateDelegate\ \mbox{\hyperlink{class_u_t_p_s_game_user_settings_a1f8f541dcab9272c20765ff493708dc2}{OnVideoSettingsUpdate}};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00033\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00034\ \ \ \ \ TArray<\mbox{\hyperlink{class_u_t_p_s_game_setting}{UTPSGameSetting}}*>\ VideoSettings;}
+\DoxyCodeLine{00035\ \};}
+
+\end{DoxyCode}

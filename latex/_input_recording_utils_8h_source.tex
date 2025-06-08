@@ -1,0 +1,110 @@
+\doxysection{Input\+Recording\+Utils.\+h}
+\hypertarget{_input_recording_utils_8h_source}{}\label{_input_recording_utils_8h_source}\index{Source/TPS/Tests/Utils/InputRecordingUtils.h@{Source/TPS/Tests/Utils/InputRecordingUtils.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Constant.Inc}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}InputAction.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}InputActionValue.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}InputRecordingUtils.generated.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ UENUM(BlueprintType)}
+\DoxyCodeLine{00011\ \textcolor{keyword}{enum\ class}\ ESerializedInputActionValueType\ :\ uint8}
+\DoxyCodeLine{00012\ \{}
+\DoxyCodeLine{00013\ \ \ \ \ Boolean,}
+\DoxyCodeLine{00014\ \ \ \ \ Axis1D,}
+\DoxyCodeLine{00015\ \ \ \ \ Axis2D,}
+\DoxyCodeLine{00016\ \ \ \ \ Axis3D}
+\DoxyCodeLine{00017\ \};}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ USTRUCT(BlueprintType)}
+\DoxyCodeLine{00020\ struct\ FSerializableInputActionValue}
+\DoxyCodeLine{00021\ \{}
+\DoxyCodeLine{00022\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00025\ \ \ \ \ FVector\ Value\ =\ FVector::ZeroVector;}
+\DoxyCodeLine{00026\ }
+\DoxyCodeLine{00027\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00028\ \ \ \ \ ESerializedInputActionValueType\ ValueType\ =\ ESerializedInputActionValueType::Boolean;}
+\DoxyCodeLine{00029\ }
+\DoxyCodeLine{00030\ \ \ \ \ FSerializableInputActionValue()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00031\ }
+\DoxyCodeLine{00032\ \ \ \ \ FSerializableInputActionValue(\textcolor{keyword}{const}\ FInputActionValue\&\ In)}
+\DoxyCodeLine{00033\ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (In.GetValueType())}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EInputActionValueType::Boolean:}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ FVector(In.Get<\textcolor{keywordtype}{bool}>()\ ?\ 1.f\ :\ 0.f,\ 0.f,\ 0.f);}
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValueType\ =\ ESerializedInputActionValueType::Boolean;}
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EInputActionValueType::Axis1D:}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ FVector(In.Get<\textcolor{keywordtype}{float}>(),\ 0.f,\ 0.f);}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValueType\ =\ ESerializedInputActionValueType::Axis1D;}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EInputActionValueType::Axis2D:}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FVector2D\ Vec\ =\ In.Get<FVector2D>();}
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ FVector(Vec.X,\ Vec.Y,\ 0.f);}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValueType\ =\ ESerializedInputActionValueType::Axis2D;}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ EInputActionValueType::Axis3D:}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ Value\ =\ In.Get<FVector>();}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ ValueType\ =\ ESerializedInputActionValueType::Axis3D;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{break};}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00054\ \ \ \ \ \}}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ FInputActionValue\ ToInputActionValue()\textcolor{keyword}{\ const}}
+\DoxyCodeLine{00057\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{switch}\ (ValueType)}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00060\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESerializedInputActionValueType::Boolean:\ \textcolor{keywordflow}{return}\ FInputActionValue(!Value.IsZero());}
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESerializedInputActionValueType::Axis1D:\ \textcolor{keywordflow}{return}\ FInputActionValue(\textcolor{keyword}{static\_cast<}\textcolor{keywordtype}{float}\textcolor{keyword}{>}(Value.X));}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESerializedInputActionValueType::Axis2D:\ \textcolor{keywordflow}{return}\ FInputActionValue(FVector2D(Value.X,\ Value.Y));}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{case}\ ESerializedInputActionValueType::Axis3D:\ \textcolor{keywordflow}{return}\ FInputActionValue(Value);}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{default}:\ \textcolor{keywordflow}{return}\ FInputActionValue(\textcolor{keyword}{false});}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00066\ \ \ \ \ \}}
+\DoxyCodeLine{00067\ \};}
+\DoxyCodeLine{00068\ }
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ USTRUCT()}
+\DoxyCodeLine{00071\ struct\ \mbox{\hyperlink{struct_f_input_action_data}{FInputActionData}}}
+\DoxyCodeLine{00072\ \{}
+\DoxyCodeLine{00073\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00074\ }
+\DoxyCodeLine{00075\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00076\ \ \ \ \ UInputAction*\ Action;}
+\DoxyCodeLine{00077\ }
+\DoxyCodeLine{00078\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00079\ \ \ \ \ \mbox{\hyperlink{struct_f_serializable_input_action_value}{FSerializableInputActionValue}}\ Value;}
+\DoxyCodeLine{00080\ \};}
+\DoxyCodeLine{00081\ }
+\DoxyCodeLine{00082\ USTRUCT()}
+\DoxyCodeLine{00083\ struct\ \mbox{\hyperlink{struct_f_bindings_data}{FBindingsData}}}
+\DoxyCodeLine{00084\ \{}
+\DoxyCodeLine{00085\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00086\ }
+\DoxyCodeLine{00087\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00088\ \ \ \ \ TArray<FInputActionData>\ InputActions;}
+\DoxyCodeLine{00089\ }
+\DoxyCodeLine{00090\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00091\ \ \ \ \ \textcolor{keywordtype}{float}\ WorldTime\ \{0.0f\};}
+\DoxyCodeLine{00092\ \};}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ USTRUCT()}
+\DoxyCodeLine{00095\ struct\ \mbox{\hyperlink{struct_f_input_data}{FInputData}}}
+\DoxyCodeLine{00096\ \{}
+\DoxyCodeLine{00097\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00100\ \ \ \ \ TArray<FBindingsData>\ BindingsData;}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00102\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00103\ \ \ \ \ FTransform\ InitialTransform;}
+\DoxyCodeLine{00104\ \};}
+
+\end{DoxyCode}

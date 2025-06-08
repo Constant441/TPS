@@ -1,0 +1,46 @@
+\doxysection{TPSGame\+Setting.\+h}
+\hypertarget{_t_p_s_game_setting_8h_source}{}\label{_t_p_s_game_setting_8h_source}\index{Source/TPS/Settings/TPSGameSetting.h@{Source/TPS/Settings/TPSGameSetting.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}TPSGameSetting.generated.h"{}}}
+\DoxyCodeLine{00007\ }
+\DoxyCodeLine{00008\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_f_setting_option}{FSettingOption}}}
+\DoxyCodeLine{00009\ \{}
+\DoxyCodeLine{00010\ \ \ \ \ FText\ Name;}
+\DoxyCodeLine{00011\ \ \ \ \ int32\ Value;}
+\DoxyCodeLine{00012\ \};}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ UCLASS()}
+\DoxyCodeLine{00015\ class\ \mbox{\hyperlink{class_u_t_p_s_game_setting}{UTPSGameSetting}}\ :\ public\ UObject}
+\DoxyCodeLine{00016\ \{}
+\DoxyCodeLine{00017\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keywordtype}{void}\ SetName(\textcolor{keyword}{const}\ FText\&\ InName);}
+\DoxyCodeLine{00021\ \ \ \ \ \textcolor{keywordtype}{void}\ SetOptions(\textcolor{keyword}{const}\ TArray<FSettingOption>\&\ InOptions);}
+\DoxyCodeLine{00022\ }
+\DoxyCodeLine{00023\ \ \ \ \ \mbox{\hyperlink{struct_f_setting_option}{FSettingOption}}\ GetCurrentOption()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00024\ \ \ \ \ FText\ GetName()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keywordtype}{void}\ AddGetter(TFunction<int32()>\ Func);}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keywordtype}{void}\ AddSetter(TFunction<\textcolor{keywordtype}{void}(int32)>\ Func);}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keywordtype}{void}\ ApplyPrevOption();}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{void}\ ApplyNextOption();}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00032\ \ \ \ \ FText\ Name;}
+\DoxyCodeLine{00033\ \ \ \ \ TArray<FSettingOption>\ Options;}
+\DoxyCodeLine{00034\ \ \ \ \ TFunction<int32()>\ Getter;}
+\DoxyCodeLine{00035\ \ \ \ \ TFunction<void(int32)>\ Setter;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \ \ \ \ int32\ GetCurrentValue()\ \textcolor{keyword}{const};}
+\DoxyCodeLine{00038\ \ \ \ \ \textcolor{keywordtype}{void}\ SetCurrentValue(int32\ Value);}
+\DoxyCodeLine{00039\ \ \ \ \ FORCENOINLINE\ int32\ GetCurrentIndex();}
+\DoxyCodeLine{00040\ \};}
+
+\end{DoxyCode}

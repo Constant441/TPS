@@ -1,0 +1,48 @@
+\doxysection{TPSTurret.\+h}
+\hypertarget{_t_p_s_turret_8h_source}{}\label{_t_p_s_turret_8h_source}\index{Source/TPS/Weapon/TPSTurret.h@{Source/TPS/Weapon/TPSTurret.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//\ Fill\ out\ your\ copyright\ notice\ in\ the\ Description\ page\ of\ Project\ Settings.}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}GameFramework/Actor.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}TPSTurret.generated.h"{}}}
+\DoxyCodeLine{00008\ }
+\DoxyCodeLine{00009\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_a_t_p_s_projectile}{ATPSProjectile}};}
+\DoxyCodeLine{00010\ }
+\DoxyCodeLine{00011\ UCLASS(Abstract)}
+\DoxyCodeLine{00012\ class\ TPS\_API\ ATPSTurret\ :\ public\ AActor}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ GENERATED\_BODY()}
+\DoxyCodeLine{00015\ }
+\DoxyCodeLine{00016\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00017\ \ \ \ \ ATPSTurret();}
+\DoxyCodeLine{00018\ }
+\DoxyCodeLine{00019\ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00020\ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ BeginPlay()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00021\ }
+\DoxyCodeLine{00022\ \ \ \ \ UPROPERTY(VisibleAnywhere,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Component"{}})}
+\DoxyCodeLine{00023\ \ \ \ \ UStaticMeshComponent*\ MeshComponent;}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Turret"{}})}
+\DoxyCodeLine{00026\ \ \ \ \ int32\ AmmoCount\ \{10\};}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Turret"{}},\ meta\ =\ (Units\ =\ s))}
+\DoxyCodeLine{00029\ \ \ \ \ \textcolor{keywordtype}{float}\ FireFrequency\ \{1.0f\};}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Turret"{}})}
+\DoxyCodeLine{00032\ \ \ \ \ FName\ MuzzleSocketName\ \{\textcolor{stringliteral}{"{}MuzzleSocket"{}}\};}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ UPROPERTY(EditDefaultsOnly,\ BlueprintReadWrite,\ Category\ =\ \textcolor{stringliteral}{"{}Turret"{}})}
+\DoxyCodeLine{00035\ \ \ \ \ TSubclassOf<ATPSProjectile>\ ProjectileClass;}
+\DoxyCodeLine{00036\ }
+\DoxyCodeLine{00037\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00038\ \ \ \ \ UPROPERTY()}
+\DoxyCodeLine{00039\ \ \ \ \ FTimerHandle\ FireTimerHandle;}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00041\ \ \ \ \ \textcolor{keywordtype}{void}\ OnFire();}
+\DoxyCodeLine{00042\ \};}
+
+\end{DoxyCode}

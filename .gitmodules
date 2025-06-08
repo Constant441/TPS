@@ -1,0 +1,9 @@
+[submodule "devops/Doxygen-Flat-Theme"]
+	path = devops/Doxygen-Flat-Theme
+	url = https://github.com/Constant441/Doxygen-Flat-Theme.git
+[submodule "devops/Doxygen-Dark-Theme"]
+	path = devops/Doxygen-Dark-Theme
+	url = https://github.com/Constant441/Doxygen-Dark-Theme.git
+[submodule "devops/Unreal-Engine-Doxygen-Filter"]
+	path = devops/Unreal-Engine-Doxygen-Filter
+	url = https://github.com/Constant441/Unreal-Engine-Doxygen-Filter.git

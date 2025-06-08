@@ -1,0 +1,65 @@
+\doxysection{ATPSCharacter Class Reference}
+\hypertarget{class_a_t_p_s_character}{}\label{class_a_t_p_s_character}\index{ATPSCharacter@{ATPSCharacter}}
+Inheritance diagram for ATPSCharacter\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_a_t_p_s_character}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+FORCEINLINE USpring\+Arm\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015}{Get\+Camera\+Boom}} () const
+\item 
+FORCEINLINE UCamera\+Component \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_a_t_p_s_character_a15583006912898a614d7835d1939020c}{Get\+Follow\+Camera}} () const
+\item 
+\Hypertarget{class_a_t_p_s_character_a85aa08b00eeb527e1f14979835452f54}\label{class_a_t_p_s_character_a85aa08b00eeb527e1f14979835452f54} 
+float {\bfseries Get\+Health\+Percent} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_t_p_s_character_a5413a922406b729e94593389b31c3996}\label{class_a_t_p_s_character_a5413a922406b729e94593389b31c3996} 
+virtual void {\bfseries Begin\+Play} () override
+\item 
+\Hypertarget{class_a_t_p_s_character_ab62a9ea27cbd608620ee472ff0782135}\label{class_a_t_p_s_character_ab62a9ea27cbd608620ee472ff0782135} 
+virtual void {\bfseries Notify\+Controller\+Changed} () override
+\item 
+\Hypertarget{class_a_t_p_s_character_a88ab970bb33e235554750ff739d78fa2}\label{class_a_t_p_s_character_a88ab970bb33e235554750ff739d78fa2} 
+virtual void {\bfseries Setup\+Player\+Input\+Component} (UInput\+Component \texorpdfstring{$\ast$}{*}Player\+Input\+Component) override
+\item 
+\Hypertarget{class_a_t_p_s_character_ae36c09f34253325b321de7c7b3b4d3ad}\label{class_a_t_p_s_character_ae36c09f34253325b321de7c7b3b4d3ad} 
+void {\bfseries Move} (const FInput\+Action\+Value \&Value)
+\item 
+\Hypertarget{class_a_t_p_s_character_af6297f3c7f504955046216e8d9ec6e51}\label{class_a_t_p_s_character_af6297f3c7f504955046216e8d9ec6e51} 
+void {\bfseries Look} (const FInput\+Action\+Value \&Value)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_a_t_p_s_character_a6c33a4404873f225ed5a45f4f32ca9d1}\label{class_a_t_p_s_character_a6c33a4404873f225ed5a45f4f32ca9d1} 
+\mbox{\hyperlink{struct_f_health_data}{FHealth\+Data}} {\bfseries Health\+Data}
+\end{DoxyCompactItemize}
+
+
+\label{doc-func-members}
+\Hypertarget{class_a_t_p_s_character_doc-func-members}
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015}\index{ATPSCharacter@{ATPSCharacter}!GetCameraBoom@{GetCameraBoom}}
+\index{GetCameraBoom@{GetCameraBoom}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{GetCameraBoom()}{GetCameraBoom()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_ab66f4e7e56366d6db63fcff98ef62015} 
+FORCEINLINE USpring\+Arm\+Component \texorpdfstring{$\ast$}{*} ATPSCharacter\+::\+Get\+Camera\+Boom (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns Camera\+Boom subobject \Hypertarget{class_a_t_p_s_character_a15583006912898a614d7835d1939020c}\index{ATPSCharacter@{ATPSCharacter}!GetFollowCamera@{GetFollowCamera}}
+\index{GetFollowCamera@{GetFollowCamera}!ATPSCharacter@{ATPSCharacter}}
+\doxysubsubsection{\texorpdfstring{GetFollowCamera()}{GetFollowCamera()}}
+{\footnotesize\ttfamily \label{class_a_t_p_s_character_a15583006912898a614d7835d1939020c} 
+FORCEINLINE UCamera\+Component \texorpdfstring{$\ast$}{*} ATPSCharacter\+::\+Get\+Follow\+Camera (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [inline]}}
+
+Returns Follow\+Camera subobject 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Source/\+TPS/TPSCharacter.\+h\item 
+Source/\+TPS/TPSCharacter.\+cpp\end{DoxyCompactItemize}

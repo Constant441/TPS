@@ -1,0 +1,147 @@
+\doxysection{Test\+Utils.\+h}
+\hypertarget{_test_utils_8h_source}{}\label{_test_utils_8h_source}\index{Source/TPS/Tests/TestUtils.h@{Source/TPS/Tests/TestUtils.h}}
+\mbox{\hyperlink{_test_utils_8h}{Go to the documentation of this file.}}
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#if\ (WITH\_AUTOMATION\_TESTS)}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ "{}Blueprint/WidgetBlueprintLibrary.h"{}}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ "{}Blueprint/WidgetTree.h"{}}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ "{}CoreMinimal.h"{}}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ "{}Tests/AutomationCommon.h"{}}}
+\DoxyCodeLine{00009\ }
+\DoxyCodeLine{00010\ \textcolor{keyword}{enum\ class}\ ETriggerEvent\ :\ uint8;}
+\DoxyCodeLine{00011\ }
+\DoxyCodeLine{00012\ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_t_p_s}{TPS}}}
+\DoxyCodeLine{00013\ \{}
+\DoxyCodeLine{00014\ \ \ \ \ \textcolor{keyword}{namespace\ }\mbox{\hyperlink{namespace_t_p_s_1_1_test}{Test}}}
+\DoxyCodeLine{00015\ \ \ \ \ \{}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ Type1,\ \textcolor{keyword}{typename}\ Type2>}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{keyword}{struct\ }TestPayload}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \ \ \ \ Type1\ TestValue;}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \ \ \ \ Type2\ ExpectedValue;}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ Tolerance\ =\ UE\_SMALL\_NUMBER;}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \textcolor{preprocessor}{\#define\ ENUM\_LOOP\_START(TYPE,\ EnumElem)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00026\ \textcolor{preprocessor}{\ \ \ \ for\ (int32\ Index\ =\ 0;\ Index\ <\ StaticEnum<TYPE>()-\/>NumEnums()\ -\/\ 1;\ ++Index)\ \(\backslash\)}}
+\DoxyCodeLine{00027\ \textcolor{preprocessor}{\ \ \ \ \{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00028\ \textcolor{preprocessor}{\ \ \ \ \ \ \ \ const\ auto\ EnumElem\ =\ static\_cast<TYPE>(StaticEnum<TYPE>()-\/>GetValueByIndex(Index));}}
+\DoxyCodeLine{00029\ \textcolor{preprocessor}{\#define\ ENUM\_LOOP\_END\ \}}}
+\DoxyCodeLine{00030\ }
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ EnumType,\ \textcolor{keyword}{typename}\ FunctionType>}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ ForEach(FunctionType\&\&\ Function)}
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ UEnum*\ Enum\ =\ StaticEnum<EnumType>();}
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}\ (int32\ i\ =\ 0;\ i\ <\ Enum-\/>NumEnums();\ ++i)\ \{\ Function(\textcolor{keyword}{static\_cast<}EnumType\textcolor{keyword}{>}(Enum-\/>GetValueByIndex(i)));\ \}}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00037\ }
+\DoxyCodeLine{00038\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ T*\ CreateBlueprint(UWorld*\ World,\ \textcolor{keyword}{const}\ FString\&\ Name,\ \textcolor{keyword}{const}\ FTransform\&\ Transform\ =\ FTransform::Identity)}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ UBlueprint*\ Blueprint\ =\ LoadObject<UBlueprint>(\textcolor{keyword}{nullptr},\ *Name);}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (World\ \&\&\ Blueprint)\ ?\ World-\/>SpawnActor<T>(Blueprint-\/>GeneratedClass,\ Transform)\ :\ nullptr;}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00045\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ T*\ CreateBlueprintDeferred(UWorld*\ World,\ \textcolor{keyword}{const}\ FString\&\ Name,\ \textcolor{keyword}{const}\ FTransform\&\ Transform\ =\ FTransform::Identity)}
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00049\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ UBlueprint*\ Blueprint\ =\ LoadObject<UBlueprint>(\textcolor{keyword}{nullptr},\ *Name);}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (World\ \&\&\ Blueprint)\ ?\ World-\/>SpawnActorDeferred<T>(Blueprint-\/>GeneratedClass,\ Transform)\ :\ nullptr;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00052\ }
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }LevelScope}
+\DoxyCodeLine{00054\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00055\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00056\ \ \ \ \ \ \ \ \ \ \ \ \ LevelScope(\textcolor{keyword}{const}\ FString\&\ MapName)\ \{\ AutomationOpenMap(MapName);\ \};}
+\DoxyCodeLine{00057\ }
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ \ \ \ \ \string~LevelScope()\ \{\ ADD\_LATENT\_AUTOMATION\_COMMAND(FExitGameCommand);\ \};}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ UWorld*\ GetTestGameWorld();}
+\DoxyCodeLine{00062\ }
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ CallFuncByNameWithParams(UObject*\ Object,\ \textcolor{keyword}{const}\ FString\&\ FuncName,\ \textcolor{keyword}{const}\ TArray<FString>\&\ Params);}
+\DoxyCodeLine{00064\ }
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }FTPSUntilLatentCommand\ :\ \textcolor{keyword}{public}\ IAutomationLatentCommand}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ FTPSUntilLatentCommand(TFunction<\textcolor{keywordtype}{void}()>\ InCallback,\ TFunction<\textcolor{keywordtype}{void}()>\ InTimeoutCallback,\ \textcolor{keywordtype}{float}\ InTimeout\ =\ 5.0f);}
+\DoxyCodeLine{00069\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Update()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00070\ }
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00072\ \ \ \ \ \ \ \ \ \ \ \ \ TFunction<void()>\ Callback;}
+\DoxyCodeLine{00073\ \ \ \ \ \ \ \ \ \ \ \ \ TFunction<void()>\ TimeoutCallback;}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ Timeout;}
+\DoxyCodeLine{00075\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00077\ \ \ \ \ \ \ \ \ int32\ GetActionBindingIndexByName(\textcolor{keyword}{const}\ UEnhancedInputComponent*\ InputComponent,\ \textcolor{keyword}{const}\ FString\&\ ActionName,\ ETriggerEvent\ TriggerEvent);}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \ \ \ \ \ \ \ \ \textcolor{keyword}{inline}\ FString\ GetTestsDataDir()}
+\DoxyCodeLine{00080\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00081\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ FPaths::GameSourceDir().Append(\textcolor{stringliteral}{"{}TPS/Tests/Data/"{}});}
+\DoxyCodeLine{00082\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00083\ }
+\DoxyCodeLine{00084\ \ \ \ \ \ \ \ \ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00085\ \ \ \ \ \ \ \ \ T*\ FindWidgetByClass()}
+\DoxyCodeLine{00086\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00087\ \ \ \ \ \ \ \ \ \ \ \ \ TArray<UUserWidget*>\ Widgets;}
+\DoxyCodeLine{00088\ \ \ \ \ \ \ \ \ \ \ \ \ UWidgetBlueprintLibrary::GetAllWidgetsOfClass(GetTestGameWorld(),\ Widgets,\ T::StaticClass(),\ \textcolor{keyword}{false});}
+\DoxyCodeLine{00089\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ Widgets.IsEmpty()\ ?\ nullptr\ :\ Cast<T>(Widgets[0]);}
+\DoxyCodeLine{00090\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00091\ }
+\DoxyCodeLine{00092\ \ \ \ \ \ \ \ \ UWidget*\ FindWidgetByName(\textcolor{keyword}{const}\ UUserWidget*\ Widget,\ \textcolor{keyword}{const}\ FName\&\ WidgetName);}
+\DoxyCodeLine{00093\ }
+\DoxyCodeLine{00094\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ DoInputAction(\textcolor{keyword}{const}\ UEnhancedInputComponent*\ EnhancedInputComponent,\ \textcolor{keyword}{const}\ FString\&\ ActionName,\ ETriggerEvent\ TriggerEvent);}
+\DoxyCodeLine{00095\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ JumpPressed(\textcolor{keyword}{const}\ UEnhancedInputComponent*\ EnhancedInputComponent);}
+\DoxyCodeLine{00096\ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ PausePressed(\textcolor{keyword}{const}\ UEnhancedInputComponent*\ EnhancedInputComponent);}
+\DoxyCodeLine{00097\ }
+\DoxyCodeLine{00098\ }
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }FTakeScreenshotLatentCommand\ :\ \textcolor{keyword}{public}\ IAutomationLatentCommand}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \ \ \ \ FTakeScreenshotLatentCommand(\textcolor{keyword}{const}\ FString\&\ InScreenshotName)\ :\ ScreenshotName(InScreenshotName)}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ FAutomationTestFramework::Get().OnScreenshotTakenAndCompared.AddRaw(\textcolor{keyword}{this},\ \&FTakeScreenshotLatentCommand::OnScreenshotTakenAndCompared);}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00106\ }
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \string~FTakeScreenshotLatentCommand()\ \{\ FAutomationTestFramework::Get().OnScreenshotTakenAndCompared.RemoveAll(\textcolor{keyword}{this});\ \};}
+\DoxyCodeLine{00108\ }
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keyword}{protected}:}
+\DoxyCodeLine{00110\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ FString\ ScreenshotName;}
+\DoxyCodeLine{00111\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ ScreenshotRequested\ \{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00112\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ CommandCompleted\ \{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00113\ }
+\DoxyCodeLine{00114\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnScreenshotTakenAndCompared()\ \{\ CommandCompleted\ =\ \textcolor{keyword}{true};\ \};}
+\DoxyCodeLine{00115\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00116\ }
+\DoxyCodeLine{00117\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }FTakeGameScreenshotLatentCommand\ :\ \textcolor{keyword}{public}\ FTakeScreenshotLatentCommand}
+\DoxyCodeLine{00118\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00119\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00120\ \ \ \ \ \ \ \ \ \ \ \ \ FTakeGameScreenshotLatentCommand(\textcolor{keyword}{const}\ FString\&\ InScreenshotName)\ :\ FTakeScreenshotLatentCommand(InScreenshotName)\ \{\}}
+\DoxyCodeLine{00121\ }
+\DoxyCodeLine{00122\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Update()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00123\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00124\ }
+\DoxyCodeLine{00125\ \ \ \ \ \ \ \ \ \textcolor{keyword}{class\ }FTakeUIScreenshotLatentCommand\ :\ \textcolor{keyword}{public}\ FTakeScreenshotLatentCommand}
+\DoxyCodeLine{00126\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00127\ \ \ \ \ \ \ \ \ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00128\ \ \ \ \ \ \ \ \ \ \ \ \ FTakeUIScreenshotLatentCommand(\textcolor{keyword}{const}\ FString\&\ InScreenshotName)\ :\ FTakeScreenshotLatentCommand(InScreenshotName)\ \{\};}
+\DoxyCodeLine{00129\ }
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{bool}\ Update()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00131\ }
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{bool}\ ScreenshotSetupDone\ \{\textcolor{keyword}{false}\};}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00135\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{virtual}\ \textcolor{keywordtype}{void}\ OnScreenshotTakenAndCompared()\ \textcolor{keyword}{override};}
+\DoxyCodeLine{00136\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{void}\ SetBufferVisualization(\textcolor{keyword}{const}\ FName\&\ VisualizeBuffer);}
+\DoxyCodeLine{00137\ \ \ \ \ \ \ \ \ \};}
+\DoxyCodeLine{00138\ \ \ \ \ \}}
+\DoxyCodeLine{00139\ \}}
+\DoxyCodeLine{00140\ }
+\DoxyCodeLine{00141\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}
