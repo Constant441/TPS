@@ -28,9 +28,14 @@ jobs:
         
       - name: Install tool dependencies
         run: conan install devops/docs --build=missing
+
+      - name: Run Doxygen
+        run: doxygen devops\docs\Doxyfile
         
       - name: Upload Docs
-        run: echo "Upload Docs"
+        uses: upload-pages-artifact@v1
+        with:
+          path: Documentation\html
         
       - name: Setup Pages
         run: echo "Setup Pages"
