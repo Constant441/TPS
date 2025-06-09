@@ -16,15 +16,17 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Download and extract Doxygen (portable)
+      - name: Download and extract Doxygen
+        shell: bash
         run: |
           curl -LO https://doxygen.nl/files/doxygen-1.9.8.windows.bin.zip
-          tar -xf doxygen-1.9.8.windows.bin.zip
-        shell: bash
-
+          unzip -q doxygen-1.9.8.windows.bin.zip
+          mv doxygen-1.9.8 windows-doxygen
+      
       - name: Run Doxygen
-        run: doxygen-1.9.8/windows/bin/doxygen.exe devops/docs/Doxyfile
         shell: cmd
+        run: |
+          windows-doxygen\bin\doxygen.exe devops\docs\Doxyfile
 
       - name: Upload documentation HTML
         uses: actions/upload-pages-artifact@v3
