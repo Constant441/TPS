@@ -43,7 +43,7 @@ pipeline {
         stage('Git clone') {
             steps {
                 checkout scmGit(branches: [[name: "$GIT_BRANCH_GAME"]],
-                                //extensions: [cleanBeforeCheckout()],
+                                extensions: [cleanBeforeCheckout()],
                                 userRemoteConfigs: [[credentialsId: "$GIT_CREDENTIALS_GAME", 
                                 url: "$GIT_URL_GAME"]])
             }
