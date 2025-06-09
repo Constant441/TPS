@@ -12,10 +12,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Check Installed Software
-        run: echo "Check Installed Software"
+        run: where git & where python & where pip
+        shell: cmd
         
       - name: Checkout
-        run: echo "Checkout"
+        uses: actions/checkout@v4
         
       - name: Install Doxygen
         run: echo "Install Doxygen"
