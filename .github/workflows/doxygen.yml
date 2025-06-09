@@ -23,11 +23,11 @@ jobs:
       - name: Install conan
         run: pip install conan
         
-      - name: Install Doxygen
-        run: conan download doxygen/1.9.4@#2af713e135f12722e3536808017ba086:e94378795f92fbf88bb8cef7f9c2f38c4ecf9126 --remote conancenter
+      - name: Detect profile
+        run: conan profile detect --force
         
-      - name: Run Doxygen
-        run: echo "Run Doxygen"
+      - name: Install tool dependencies
+        run: conan install devops/docs --build=missing
         
       - name: Upload Docs
         run: echo "Upload Docs"
