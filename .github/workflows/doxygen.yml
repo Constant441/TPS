@@ -2,59 +2,33 @@ name: Game Documentation
 
 on:
   push:
-    branches:
-      - master
+    branches: [ master ]
   pull_request:
-    branches:
-      - master
+    branches: [ master ]
 
 jobs:
   docs:
     runs-on: windows-latest
-    defaults:
-      run:
-        shell: cmd
-
     steps:
-      - name: Check Installed Software
-        run: where git & where python & where pip
-
-      - name: Checkout repository
+      - name: Checkout repo with submodules
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Install Conan 2
-        run: pip install "conan>=2.0.0"
+      - name: Install Doxygen via Chocolatey
+        run: choco install doxygen.install --yes
+        shell: cmd
 
-      - name: Detect Conan profile
-        run: conan profile detect --force
+      - name: Generate documentation with Doxygen
+        run: doxygen devops\docs\Doxyfile
+        shell: cmd
 
-      - name: Install Doxygen via Conan
-        run: >
-          conan install devops/docs
-          --build=missing
-          -of=devops/docs/build
-          --profile:host=default
-          --profile:build=default
-
-      - name: Show generated conanrun.bat
-        run: type devops\docs\build\conanrun.bat
-
-      - name: Show run environment file
-        run: type devops\docs\build\conanrunenv-release-x86_64.bat
-
-      - name: Run Doxygen (with Conan environment)
-        run: |
-          call devops\docs\build\conanrun.bat
-          doxygen devops\docs\Doxyfile
-
-      - name: Upload Documentation HTML as artifact
+      - name: Upload Documentation
         uses: actions/upload-pages-artifact@v3
         with:
           path: Documentation\html
 
-      - name: Setup Pages
+      - name: Setup GitHub Pages
         uses: actions/configure-pages@v4
 
       - name: Deploy to GitHub Pages
