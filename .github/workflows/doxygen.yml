@@ -30,7 +30,7 @@ jobs:
         run: conan install devops/docs --build=missing
 
       - name: Run Doxygen
-        run: doxygen devops\docs\Doxyfile
+        run: conan run doxygen devops/docs/Doxyfile
         
       - name: Upload Docs
         uses: actions/upload-pages-artifact@v3
