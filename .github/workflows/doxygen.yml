@@ -27,7 +27,7 @@ jobs:
         run: conan profile detect --force
         
       - name: Install tool dependencies
-        run: conan install devops/docs --build=missing
+        run: conan install devops/docs --build=missing -of=devops/docs/build
 
       - name: Run Doxygen with activated Conan environment
         shell: cmd
