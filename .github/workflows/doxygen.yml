@@ -9,18 +9,21 @@ on:
 jobs:
   docs:
     runs-on: windows-latest
+
     steps:
-      - name: Checkout repository with submodules
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
 
-      - name: Install Doxygen via Chocolatey
-        run: choco install doxygen.install --yes
-        shell: cmd
+      - name: Download and extract Doxygen (portable)
+        run: |
+          curl -LO https://doxygen.nl/files/doxygen-1.9.8.windows.bin.zip
+          tar -xf doxygen-1.9.8.windows.bin.zip
+        shell: bash
 
-      - name: Generate documentation with Doxygen (explicit path)
-        run: C:\ProgramData\chocolatey\bin\doxygen.exe devops\docs\Doxyfile
+      - name: Run Doxygen
+        run: doxygen-1.9.8/windows/bin/doxygen.exe devops/docs/Doxyfile
         shell: cmd
 
       - name: Upload documentation HTML
