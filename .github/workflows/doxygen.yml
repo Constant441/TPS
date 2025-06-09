@@ -1,39 +1,48 @@
 name: Game Documentation
+
 on:
   push:
-    branches:
-    - master
+    branches: [ master ]
   pull_request:
-    branches:
-    - master
+    branches: [ master ]
+
+permissions:
+  pages: write
+  deployments: write
+  id-token: write
 
 jobs:
   docs:
     runs-on: windows-latest
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
-      - name: Check Installed Software
-        run: where git & where python & where pip
-        shell: cmd
-        
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
+          submodules: recursive
 
-      - name: Install conan
-        run: pip install conan
-        
-      - name: Install Doxygen
-        run: conan download doxygen/1.9.4@#2af713e135f12722e3536808017ba086:e94378795f92fbf88bb8cef7f9c2f38c4ecf9126 --remote conancenter
-        
+      - name: Download and extract Doxygen (portable)
+        shell: bash
+        run: |
+          curl -LO https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.windows.x64.bin.zip
+          unzip -q doxygen-1.9.8.windows.x64.bin.zip -d doxygen-bin
+
       - name: Run Doxygen
-        run: echo "Run Doxygen"
-        
+        shell: cmd
+        run: doxygen-bin\doxygen.exe devops\docs\Doxyfile
+
       - name: Upload Docs
-        run: echo "Upload Docs"
-        
-      - name: Setup Pages
-        run: echo "Setup Pages"
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: Documentation\html
+
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v5
 
       - name: Deploy to GitHub Pages
-        run: echo "Deploy to GitHub Pages"        
+        id: deployment
+        uses: actions/deploy-pages@v4
