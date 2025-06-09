@@ -22,17 +22,17 @@ jobs:
           curl -LO https://github.com/doxygen/doxygen/releases/download/Release_1_9_8/doxygen-1.9.8.windows.x64.bin.zip
           unzip -q doxygen-1.9.8.windows.x64.bin.zip -d doxygen-bin
 
-      - name: Generate documentation with Doxygen
+      - name: Run Doxygen
         shell: cmd
         run: doxygen-bin\doxygen.exe devops\docs\Doxyfile
 
-      - name: Upload documentation HTML
+      - name: Upload Docs
         uses: actions/upload-pages-artifact@v3
         with:
           path: Documentation\html
 
       - name: Setup GitHub Pages
-        uses: actions/configure-pages@v4
+        run: echo "Setup GitHub Pages"
 
       - name: Deploy to GitHub Pages
-        uses: actions/deploy-pages@v4
+        run: echo "Deploy to GitHub Pages"
