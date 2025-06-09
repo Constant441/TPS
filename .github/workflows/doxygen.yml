@@ -28,6 +28,10 @@ jobs:
         
       - name: Install tool dependencies
         run: conan install devops/docs --build=missing -of=devops/docs/build --profile:build=default --profile:host=default
+
+      - name: Show conanrun.bat contents
+        run: type devops\docs\build\conanrun.bat
+        shell: cmd
       
       - name: Run Doxygen with activated Conan environment
         shell: cmd
