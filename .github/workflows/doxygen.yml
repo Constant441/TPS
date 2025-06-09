@@ -33,7 +33,7 @@ jobs:
         run: doxygen devops\docs\Doxyfile
         
       - name: Upload Docs
-        uses: actions/upload-pages-artifact@v1
+        uses: actions/upload-pages-artifact@v3
         with:
           path: Documentation\html
         
