@@ -1,55 +1,61 @@
 name: Game Documentation
+
 on:
   push:
     branches:
-    - master
+      - master
   pull_request:
     branches:
-    - master
+      - master
 
 jobs:
   docs:
     runs-on: windows-latest
+    defaults:
+      run:
+        shell: cmd
+
     steps:
       - name: Check Installed Software
         run: where git & where python & where pip
-        shell: cmd
-        
-      - name: Checkout
+
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodules: 'recursive'
+          submodules: recursive
 
-      - name: Install Conan
-        run: pip install conan
-        
-      - name: Detect profile
+      - name: Install Conan 2
+        run: pip install "conan>=2.0.0"
+
+      - name: Detect Conan profile
         run: conan profile detect --force
-        
-      - name: Install tool dependencies
-        run: conan install devops/docs --build=missing -of=devops/docs/build --profile:host=default --profile:build=default
 
-      - name: Show conanrun.bat contents
+      - name: Install Doxygen via Conan
+        run: >
+          conan install devops/docs
+          --build=missing
+          -of=devops/docs/build
+          --profile:host=default
+          --profile:build=default
+
+      - name: Show generated conanrun.bat
         run: type devops\docs\build\conanrun.bat
-        shell: cmd
 
-      - name: Inspect runenv file
+      - name: Show run environment file
         run: type devops\docs\build\conanrunenv-release-x86_64.bat
-        shell: cmd
-      
-      - name: Run Doxygen with activated Conan environment
-        shell: cmd
+
+      - name: Run Doxygen (with Conan environment)
         run: |
           call devops\docs\build\conanrun.bat
           doxygen devops\docs\Doxyfile
-        
-      - name: Upload Docs
+
+      - name: Upload Documentation HTML as artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: Documentation\html
-        
+
       - name: Setup Pages
-        run: echo "Setup Pages"
+        uses: actions/configure-pages@v4
 
       - name: Deploy to GitHub Pages
-        run: echo "Deploy to GitHub Pages"        
+        uses: actions/deploy-pages@v4
