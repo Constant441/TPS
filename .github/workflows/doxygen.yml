@@ -20,8 +20,11 @@ jobs:
         with:
           submodules: 'recursive'
 
-      - name: Install conan
-        run: pip install conan
+      - name: Install Conan
+        run: pip install conan==2.3.2
+
+      - name: Check Conan version
+        run: conan --version
         
       - name: Detect profile
         run: conan profile detect --force
