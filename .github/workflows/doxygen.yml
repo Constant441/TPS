@@ -21,10 +21,7 @@ jobs:
           submodules: 'recursive'
 
       - name: Install Conan
-        run: pip install conan==2.3.2
-
-      - name: Check Conan version
-        run: conan --version
+        run: pip install conan
         
       - name: Detect profile
         run: conan profile detect --force
@@ -33,7 +30,7 @@ jobs:
         run: conan install devops/docs --build=missing
 
       - name: Run Doxygen
-        run: conan run doxygen devops/docs/Doxyfile
+        run: doxygen devops/docs/Doxyfile
         
       - name: Upload Docs
         uses: actions/upload-pages-artifact@v3
