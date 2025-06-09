@@ -10,7 +10,7 @@ jobs:
   docs:
     runs-on: windows-latest
     steps:
-      - name: Checkout repo with submodules
+      - name: Checkout repository with submodules
         uses: actions/checkout@v4
         with:
           submodules: recursive
@@ -19,11 +19,11 @@ jobs:
         run: choco install doxygen.install --yes
         shell: cmd
 
-      - name: Generate documentation with Doxygen
-        run: doxygen devops\docs\Doxyfile
+      - name: Generate documentation with Doxygen (explicit path)
+        run: C:\ProgramData\chocolatey\bin\doxygen.exe devops\docs\Doxyfile
         shell: cmd
 
-      - name: Upload Documentation
+      - name: Upload documentation HTML
         uses: actions/upload-pages-artifact@v3
         with:
           path: Documentation\html
