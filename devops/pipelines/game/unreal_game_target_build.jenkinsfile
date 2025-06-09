@@ -17,13 +17,13 @@ pipeline {
     parameters {
         choice name: 'CONFIG', choices: ['Development', 'Shipping', 'DebugGame'], description: 'Build configuration'
         choice name: 'PLATFORM', choices: ['Win64', 'Android', 'Linux'], description: 'Build platform'
-        string name: 'GIT_BRANCH', defaultValue: 'master'
+        string name: 'GIT_BRANCH_GAME', defaultValue: 'master'
     }
 
 
     /*environment {
-        GIT_URL = 'https://github.com/Constant441/TPS.git'
-        GIT_CREDENTIALS = 'Constant441-github'
+        GIT_URL_GAME = 'https://github.com/Constant441/TPS.git'
+        GIT_CREDENTIALS_GAME = 'Constant441-github'
         UAT_PATH = 'D:\\Programs\\Unreal Engine\\UE_5.5\\Engine\\Build\\BatchFiles\\RunUAT.bat'
         PROJECT_PATH = "$BUILD_DIR\\TPS.uproject"
         // ARCHIVE_PATH = "D:\\JenkinsJobs\\Artifacts\\$JOB_NAME\\$BUILD_NUMBER"
@@ -46,10 +46,10 @@ pipeline {
 
         stage('Git clone') {
             steps {
-                checkout scmGit(branches: [[name: "$GIT_BRANCH"]],
+                checkout scmGit(branches: [[name: "$GIT_BRANCH_GAME"]],
                                 //extensions: [cleanBeforeCheckout()],
-                                userRemoteConfigs: [[credentialsId: "$GIT_CREDENTIALS", 
-                                url: "$GIT_URL"]])
+                                userRemoteConfigs: [[credentialsId: "$GIT_CREDENTIALS_GAME", 
+                                url: "$GIT_URL_GAME"]])
             }
         }
 
