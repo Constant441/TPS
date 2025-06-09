@@ -32,7 +32,7 @@ jobs:
       - name: Run Doxygen with activated Conan environment
         shell: cmd
         run: |
-          call devops\docs\conanrun.bat
+          call devops\docs\build\conanrun.bat
           doxygen devops\docs\Doxyfile
         
       - name: Upload Docs
