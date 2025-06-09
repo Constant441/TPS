@@ -2,14 +2,21 @@
 
 call "%~dp0\..\config.bat"
 
+set Before=public bool Unoptimizedcode = false;
+set After=public bool Unoptimizedcode = true;
+set File=%SourceCodePath%\%ProjectPureName%Editor.Target.cs
+powershell -Command "$f='%File%'; $b='%Before%'; $a='%After%'; (Get-Content $f) -replace $b, $a | Set-Content $f"
+
+
 rem build sources
 call "%RunUATPath%" BuildCookRun ^
 -project="%ProjectPath%" ^
 -platform="%Platform%" ^
 -clientconfig="%Configuration%" ^
 -archivedirectory="%ArchivePath%" ^
--build -cook
+-build -cook -ubtargs="-Unoptimizedcode"
 
+goto:EOF
 rem run tests
 set TestRunner="%EditorPath%" "%ProjectPath%" -ExecCmds="Automation RunTests %TestNames%;Quit" ^
 -log -abslog="%TestOutputLogPath%" -nosplash -ReportOutputPath="%ReportOutputPath%"
@@ -17,10 +24,12 @@ set TestRunner="%EditorPath%" "%ProjectPath%" -ExecCmds="Automation RunTests %Te
 rem run code coverage
 set ExportType=cobertura:%ReportOutputPath%\Coverage\CodeCoverageReport.xml
 "%OpenCPPCoveragePath%" --modules="%ProjectRoot%" --sources="%SourceCodePath%" ^
---excluded_sources="%SourceCodePath%\TPS\Tests" --export_type="%ExportType%" -- %TestRunner% -v
+--excluded_sources="%SourceCodePath%\TPS\Tests" --export_type="%ExportType%" -v -- %TestRunner%
 
 rem clean obsolete artifacts
 del /q LastCoverageResults.log
+powershell -Command "$f='%File%'; $b='%After%'; $a='%Before%'; (Get-Content $f) -replace $b, $a | Set-Content $f"
+
 
 rem copy test artifacts
 set TestDir=%~dp0

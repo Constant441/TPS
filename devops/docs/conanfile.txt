@@ -1,5 +1,0 @@
-[tool_requires]
-doxygen/1.9.4
-
-[generators]
-VirtualRunEnv

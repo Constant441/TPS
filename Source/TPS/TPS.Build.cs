@@ -1,5 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
+using System.Linq;
 using UnrealBuildTool;
 
 public class TPS : ModuleRules
@@ -25,5 +26,10 @@ public class TPS : ModuleRules
 		);
 
 		PublicIncludePaths.Add("TPS");
+
+		if (Target.ProjectDefinitions.Contains("UNOPTIMIZED_CODE"))
+		{
+			OptimizeCode = CodeOptimization.Never;
+		}
 	}
 }
