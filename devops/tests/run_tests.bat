@@ -14,9 +14,8 @@ call "%RunUATPath%" BuildCookRun ^
 -platform="%Platform%" ^
 -clientconfig="%Configuration%" ^
 -archivedirectory="%ArchivePath%" ^
--build -cook -ubtargs="-Unoptimizedcode"
+-build -cook -ubtargs="-Unoptimizedcode" -noturnkeyvariables
 
-goto:EOF
 rem run tests
 set TestRunner="%EditorPath%" "%ProjectPath%" -ExecCmds="Automation RunTests %TestNames%;Quit" ^
 -log -abslog="%TestOutputLogPath%" -nosplash -ReportOutputPath="%ReportOutputPath%"

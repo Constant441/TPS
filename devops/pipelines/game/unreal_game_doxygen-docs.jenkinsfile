@@ -1,0 +1,80 @@
+def ColorFromBuildResult(result){
+    if("${result}" == 'SUCCESS') return '#18A558'
+    if("${result}" == 'ABORTED') return '#6e6e6e'
+    if("${result}" == 'UNSTABLE') return '#fcba03'
+    return '#FF0000'
+}
+
+pipeline {
+    agent {
+        node {
+            label ""
+            customWorkspace "$BUILD_DIR"
+        }
+    }
+
+
+    /*environment {
+        GIT_URL_GAME = 'https://github.com/Constant441/TPS.git'
+        GIT_CREDENTIALS_GAME = 'Constant441-github'
+        GIT_BRANCH_GAME = 'master'
+        SLACK_CHANNEL = 'tps-game-builds'
+        DOXYGEN_PATH = 'doxygen'
+        DOXYFILE_PATH = "$BUILD_DIR\\devops\\docs\\Doxyfile"
+        DOCS_DIR = Documentation 
+    }*/
+
+
+    stages {
+
+        stage('Notification') {
+            steps {
+                slackSend channel: "$SLACK_CHANNEL",
+                          color: "$currentBuild.previousBuild" == 'null' ? '#18A558' : ColorFromBuildResult("$currentBuild.previousBuild.result"),
+                          message: "Build started: ${env.JOB_NAME} №${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        }
+
+        stage('Git clone') {
+            steps {
+                checkout scmGit(branches: [[name: "$GIT_BRANCH_GAME"]],
+                                extensions: [
+                                    cleanBeforeCheckout(),
+                                    submodule(recursiveSubmodules: true)
+                                ],
+                                userRemoteConfigs: [[credentialsId: "$GIT_CREDENTIALS_GAME", 
+                                url: "$GIT_URL_GAME"]])
+            }
+        }
+
+        stage('Generate docs') {
+            steps {
+                bat '''
+                    chcp 65001
+                    "%DOXYGEN_PATH%" "%DOXYFILE_PATH%"
+                '''
+            }
+        }
+
+        stage('Publish docs') {
+            steps {
+                publishHTML([allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: false,
+                    reportDir: "$DOCS_DIR",
+                    reportFiles: 'index.html',
+                    reportName: 'Docs',
+                    useWrapperFileDirectly: true])
+            }
+        }
+    }
+
+
+    post{
+        always {
+            slackSend channel: "$SLACK_CHANNEL",
+                color: ColorFromBuildResult("$currentBuild.currentResult"),
+                message: "Build $currentBuild.currentResult: ${env.JOB_NAME} №${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+    }
+}

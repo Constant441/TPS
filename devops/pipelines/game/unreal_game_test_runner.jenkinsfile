@@ -1,0 +1,147 @@
+def ColorFromBuildResult(result){
+    if("${result}" == 'SUCCESS') return '#18A558'
+    if("${result}" == 'ABORTED') return '#6e6e6e'
+    if("${result}" == 'UNSTABLE') return '#fcba03'
+    return '#FF0000'
+}
+
+pipeline {
+    agent {
+        node {
+            label "unreal_test_runner_label"
+            customWorkspace "$BUILD_DIR"
+        }
+    }
+
+
+    environment {
+        /*
+        GIT_URL_GAME = 'https://github.com/Constant441/TPS.git'
+        GIT_CREDENTIALS_GAME = 'Constant441-github'
+        GIT_BRANCH_GAME = 'master'
+        UAT_PATH = 'D:\\Programs\\Unreal Engine\\UE_5.5\\Engine\\Build\\BatchFiles\\RunUAT.bat'
+        PROJECT_PATH = "$BUILD_DIR\\TPS.uproject"
+        BUILD_FLAGS = '-build -cook -ubtargs="-Unoptimizedcode"'
+        SLACK_CHANNEL = 'tps-game-builds'
+        PLATFORM = 'Win64' // ['Android', 'Linux'..]
+        CONFIG = 'Development' // ['Shipping', 'DebugGame'..]
+        EDITOR_PATH = 'D:\\Programs\\Unreal Engine\\UE_5.5\\Engine\\Binaries\\Win64\\UnrealEditor.exe'
+        TEST_NAMES = TPSGame
+        TEST_OUTPUT_PATH = "$BUILD_DIR\\Build\Tests"
+        EDITOR_FLAGS = '-stdout -nosplash'
+        CODE_COVERAGE_EXPORT_TYPE = "cobertura:$BUILD_DIR\\Build\Tests\\Coverage.xml"
+        OPEN_CPP_COVERAGE_PATH = 'D:\\Programs\\OpenCppCoverage\\OpenCppCoverage.exe'
+        SOURCE_CODE_PATH = "$BUILD_DIR\\Source"
+        EXCLUDED_SOURCES = "$BUILD_DIR\\Source\\TPS\\Tests"
+        PROJECT_PURE_NAME = 'TPS'
+        UNOPTIMIZED_BUILD = false
+        */
+        UNOPTIMIZE_FALSE_LINE = 'public bool Unoptimizedcode = false;'
+        UNOPTIMIZE_TRUE_LINE = 'public bool Unoptimizedcode = true;'
+        EDITOR_TARGET_PATH = "$SOURCE_CODE_PATH\\${PROJECT_PURE_NAME}Editor.Target.cs"
+    }
+
+
+
+    stages {
+
+        stage('Notification') {
+            steps {
+                slackSend channel: "$SLACK_CHANNEL",
+                          color: "$currentBuild.previousBuild" == 'null' ? '#18A558' : ColorFromBuildResult("$currentBuild.previousBuild.result"),
+                          message: "Build started: ${env.JOB_NAME} №${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+            }
+        }
+
+        stage('Git clone') {
+            steps {
+                checkout scmGit(branches: [[name: "$GIT_BRANCH_GAME"]],
+                                extensions: [cleanBeforeCheckout()],
+                                userRemoteConfigs: [[credentialsId: "$GIT_CREDENTIALS_GAME", 
+                                url: "$GIT_URL_GAME"]])
+            }
+        }
+
+        stage('Set unoptimized build') {
+            
+            when {
+                environment name: 'UNOPTIMIZED_BUILD', value: 'true'
+            }
+
+            steps {
+                bat '''
+                    powershell -Command "$f='%EDITOR_TARGET_PATH%'; $b='%UNOPTIMIZE_FALSE_LINE%'; $a='%UNOPTIMIZE_TRUE_LINE%'; (Get-Content $f) -replace $b, $a | Set-Content $f"
+                '''
+            }
+        }
+
+        stage('Build') {
+            steps {
+                bat '''
+                    chcp 65001
+                    "%UAT_PATH%" BuildCookRun ^
+                    -project="%PROJECT_PATH%" ^
+                    -platform="%PLATFORM%" ^
+                    -clientconfig="%CONFIG%" ^
+                    %BUILD_FLAGS% -noturnkeyvariables
+                '''
+            }
+        }
+
+        stage('Test') {
+            steps {
+                bat '''
+                    chcp 65001
+                    set TEST_RUNNER="%EDITOR_PATH%" "%PROJECT_PATH%" -ExecCmds="Automation RunTests %TEST_NAMES%;Quit" ^
+                    -ReportOutputPath="%TEST_OUTPUT_PATH%" "%EDITOR_FLAGS%"
+
+                    "%OPEN_CPP_COVERAGE_PATH%" --modules="%BUILD_DIR%" --sources="%SOURCE_CODE_PATH%" ^
+                    --excluded_sources="%EXCLUDED_SOURCES%" --export_type="%CODE_COVERAGE_EXPORT_TYPE%" -- %TEST_RUNNER%
+
+                    if errorlevel 255 echo WARNING: Some tests failed, error code: %errorlevel% & exit /b 0
+                '''
+            }
+        }
+
+        stage('Unset unoptimized build') {
+            when {
+                environment name: 'UNOPTIMIZED_BUILD', value: 'true'
+            }
+
+            steps {
+                bat '''
+                    chcp 65001
+                    powershell -Command "$f='%EDITOR_TARGET_PATH%'; $b='%UNOPTIMIZE_TRUE_LINE%'; $a='%UNOPTIMIZE_FALSE_LINE%'; (Get-Content $f) -replace $b, $a | Set-Content $f"
+                '''
+            }
+        }
+
+        stage('Publish test results') {
+            environment {
+                CONVERTER_PATH="$BUILD_DIR\\devops\\tests\\ue_report_to_junit.py"
+                UE_TESTS_PATH="$BUILD_DIR\\Build\\Tests\\index.json"
+                JUNIT_TESTS_PATH="$BUILD_DIR\\Build\\Tests\\index.xml"
+                COBERTURA_PATCHER_PATH="$BUILD_DIR\\devops\\tests\\cobertura_report_patcher.py"
+                CODE_COVERAGE_PATH="$BUILD_DIR\\Build\\Tests\\Coverage.xml"
+            }
+            steps {
+                bat '''
+                    chcp 65001
+                    python "%CONVERTER_PATH%" -ue_report_path="%UE_TESTS_PATH%" -junit_xml_path="%JUNIT_TESTS_PATH%"
+                    python "%COBERTURA_PATCHER_PATH%" -cobertura_report_path="%CODE_COVERAGE_PATH%"
+                '''
+                junit 'Build\\Tests\\index.xml'
+                cobertura coberturaReportFile: 'Build\\Tests\\Coverage.xml', onlyStable: false
+            }
+        }
+    }
+
+
+    post{
+        always {
+            slackSend channel: "$SLACK_CHANNEL",
+                color: ColorFromBuildResult("$currentBuild.currentResult"),
+                message: "Build $currentBuild.currentResult: ${env.JOB_NAME} №${env.BUILD_NUMBER} (<${env.BUILD_URL}|Open>)"
+        }
+    }
+}
