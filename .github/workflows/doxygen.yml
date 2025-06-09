@@ -6,9 +6,18 @@ on:
   pull_request:
     branches: [ master ]
 
+permissions:
+  pages: write
+  deployments: write
+  id-token: write
+
 jobs:
   docs:
     runs-on: windows-latest
+    
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Checkout repository
@@ -32,7 +41,8 @@ jobs:
           path: Documentation\html
 
       - name: Setup GitHub Pages
-        run: echo "Setup GitHub Pages"
+        uses: actions/configure-pages@v5
 
       - name: Deploy to GitHub Pages
-        run: echo "Deploy to GitHub Pages"
+        id: deployment
+        uses: actions/deploy-pages@v4
