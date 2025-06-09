@@ -29,8 +29,13 @@ jobs:
       - name: Install tool dependencies
         run: conan install devops/docs --build=missing
 
-      - name: Run Doxygen
-        run: doxygen devops/docs/Doxyfile
+      - name: Run Doxygen (with Conan environment)
+        shell: pwsh
+        run: |
+          $envScript = Get-ChildItem -Recurse -Filter "conanrun.bat" | Select-Object -First 1
+          if ($null -eq $envScript) { throw "conanrun.bat not found" }
+          & "$($envScript.FullName)"
+          doxygen devops/docs/Doxyfile
         
       - name: Upload Docs
         uses: actions/upload-pages-artifact@v3
