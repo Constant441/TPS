@@ -1,2 +1,5 @@
-[requires]
+[tool_requires]
 doxygen/1.14.0
+
+[generators]
+VirtualRunEnv
